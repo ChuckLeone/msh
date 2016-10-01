@@ -1,1 +1,14 @@
 /* Empty. Add your own CSS if you like */
+header {
+    background-color: #444;
+    color: #fff;
+    padding: 20px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
