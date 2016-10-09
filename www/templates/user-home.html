@@ -1,10 +1,18 @@
 <ion-view>
-    <ion-content ng-controller="userCtrl">
+    <ion-content>
         <div class="row">
             <div class="col">Welcome <strong>{{ userName }}</strong></div>
         </div>
-        <div class="row">
-            <div class="col col-75"></div>
+        <div class="row" ng-show="state.loggedIn == true">
+            <div class="col col-75">
+                <div class="col col-25">data</div>
+                <div class="col col-25">data</div>
+                <div class="col col-25">data</div>
+                <div class="col col-25">data</div>
+            </div>
+        </div>
+        <div class="row" ng-show="state.loggedIn != true">
+            <div class="col col-75"><ion-item ng-click="login()">Login to see your data.</ion-item></div>
         </div>
     <ion-content>
 <ion-view>

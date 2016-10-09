@@ -21,8 +21,24 @@ angular.module('starter.controllers', [])
 
   $scope.userName = '';
 
-  $state.loggedIn = false;
+  $scope.state = {
+    loggedIn: false
+  }
+
   $scope.$location;
+
+  setUsername();
+
+
+  function setUsername (){ 
+      if ( $scope.state.loggedIn == true ) {
+      $scope.userName = $scope.loginData.username;
+      console.log("user Ctrl says yes login is " + $scope.state.loggedIn)
+    } else {
+      $scope.userName = 'please login';
+      console.log("user Ctrl says no login is " + $scope.state.loggedIn)
+    }
+  };
 
   //slide controller
   $scope.nextSlide = function() {
@@ -51,13 +67,17 @@ angular.module('starter.controllers', [])
   };
 
   // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
+  $scope.doLogin = function(username) {
 
     if  (($scope.loginData.username == 'demo') && ($scope.loginData.password == '1234')) {
-      $scope.userName = $scope.loginData.username;   
+      //$scope.userName = $scope.loginData.username;   
+      
+      
+      $scope.state.loggedIn = true;
+      setUsername();
+      console.log("welcome " + ' ' + $scope.userName + ' ' + $scope.state.loggedIn );
       $state.transitionTo('app.loggedIn');
-      $state.loggedIn = true;
-      console.log("welcome " + ' ' + $scope.userName);
+      
     } else {
       console.log("error - wrong login brah!" + ' ');
     }
@@ -66,6 +86,7 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -83,7 +104,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('homeCtrl', function($scope){
-})
+});
 
 /* .controller('userCtrl', function($scope){
   if ( $scope.loggedIn == true ) {
@@ -95,12 +116,22 @@ angular.module('starter.controllers', [])
   }
 });*/
 
-.controller('userCtrl', function($scope){
-  if ( $scope.loggedIn == true ) {
-    $scope.userName = $scope.loginData.username;
-    console.log("user Ctrl says yes login is " + $scope.loggedIn)
-  } else {
-    $scope.userName = 'please login';
-    console.log("user Ctrl says nope login is " + $scope.loggedIn)
-  }
-});
+/*.controller('userCtrl', function($scope){
+      if ( $scope.state.loggedIn = true ) {
+      $scope.userName = $scope.loginData.username;
+      console.log("user Ctrl says yes login is " + $scope.loggedIn)
+    } else {
+      $scope.userName = 'please login';
+      console.log("user Ctrl says nope login is " + $scope.loggedIn)
+    }
+})*/
+
+/* $setUsername = function($scope) {
+      if ( $scope.state.loggedIn = true ) {
+      $scope.userName = $scope.loginData.username;
+      console.log("user Ctrl says yes login is " + $scope.loggedIn)
+    } else {
+      $scope.userName = 'please login';
+      console.log("user Ctrl says nope login is " + $scope.loggedIn)
+    }
+  };*/
