@@ -51,6 +51,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
     
+  .state('app.myrofile', {
+      url: '/profile',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/profile.html'
+        }
+      }
+  })
+
   .state('app.createProfile', {
       url: '/create-profile',
       views: {
@@ -59,6 +68,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
   })
+
+  .state('app.loggedOut', {
+        url: '/home',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/home.html'
+          }
+        }
+    })
 
   .state('app.loggedIn', {
         url: '/user-home',

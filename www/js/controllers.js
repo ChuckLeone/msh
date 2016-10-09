@@ -66,6 +66,12 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
+  // log the user out
+  $scope.logout = function() {
+    $scope.state.loggedIn = false;
+    $state.transitionTo('app.loggedOut');
+  }
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function(username) {
 
