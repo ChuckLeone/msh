@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicSlideBoxDelegate) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicSlideBoxDelegate, $state, $stateParams, $location) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -8,17 +8,31 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  
-  //slide controller
 
+  /*$scope.userName = (function(userName) {
+    
+   if (userName !== null ) {
+      var username = 'Please Login';
+    console.log("generate a name" + ' ' + username);
+    return username;
+   } else 
+    return username;
+  } )();*/
+
+  $scope.userName = '';
+
+  $state.loggedIn = false;
+  $scope.$location;
+
+  //slide controller
   $scope.nextSlide = function() {
     $ionicSlideBoxDelegate.next();
-    console.log("slide button clicked!");
   }
 
   // Form data for the login modal
   $scope.loginData = {};
-  
+  $scope.loggedinView = ('templates/user-home.html')
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -38,9 +52,15 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
+    if  (($scope.loginData.username == 'demo') && ($scope.loginData.password == '1234')) {
+      $scope.userName = $scope.loginData.username;   
+      $state.transitionTo('app.loggedIn');
+      $state.loggedIn = true;
+      console.log("welcome " + ' ' + $scope.userName);
+    } else {
+      console.log("error - wrong login brah!" + ' ');
+    }
     // code if using a login system
     $timeout(function() {
       $scope.closeLogin();
@@ -59,5 +79,28 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('PlaylistCtrl', function($scope, $stateParams, $state) {
+})
+
+.controller('homeCtrl', function($scope){
+})
+
+/* .controller('userCtrl', function($scope){
+  if ( $scope.loggedIn == true ) {
+    $scope.userName = $scope.loginData.username;
+    console.log("user Ctrl says yes login is " + $scope.loggedIn)
+  } else {
+    $scope.userName = 'please login';
+    console.log("user Ctrl says nope login is " + $scope.loggedIn)
+  }
+});*/
+
+.controller('userCtrl', function($scope){
+  if ( $scope.loggedIn == true ) {
+    $scope.userName = $scope.loginData.username;
+    console.log("user Ctrl says yes login is " + $scope.loggedIn)
+  } else {
+    $scope.userName = 'please login';
+    console.log("user Ctrl says nope login is " + $scope.loggedIn)
+  }
 });

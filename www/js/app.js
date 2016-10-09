@@ -22,10 +22,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function( $stateProvider, $urlRouterProvider) {
+
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -49,7 +50,35 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.playlists', {
+    
+  .state('app.createProfile', {
+      url: '/create-profile',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/create-profile.html'
+        }
+      }
+  })
+
+  .state('app.loggedIn', {
+        url: '/user-home',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/user-home.html'
+          }
+        }
+    })
+    
+  .state('app.about', {
+      url: '/about',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/about.html'
+        }
+      }
+    })
+  
+  .state('app.playlists', {
       url: '/playlists',
       views: {
         'menuContent': {

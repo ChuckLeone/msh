@@ -12,3 +12,14 @@ header {
 .right {
     float: right;
 }
+
+fieldset {
+    border: 0;
+
+}
+
+legend {
+    border: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
