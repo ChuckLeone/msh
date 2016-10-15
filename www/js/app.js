@@ -47,6 +47,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/home.html'
+        },
+        'header': {
+          templateUrl: 'templates/header.html'
         }
       }
     })
@@ -79,10 +82,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('app.loggedIn', {
-        url: '/user-home',
+        url: '/home',
         views: {
           'menuContent': {
-            templateUrl: 'templates/user-home.html'
+            templateUrl: 'templates/home.html'
           }
         }
     })

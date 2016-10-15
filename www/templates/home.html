@@ -1,5 +1,17 @@
-<ion-view>
-  <ion-content ng-controller="homeCtrl">
+
+<ion-view class="has-header">
+  <ion-header-bar align-title="left" class="bar-positive">
+  <div class="buttons">
+    <button class="button" ng-click="doSomething()">Left Button</button>
+  </div>
+  <h1 class="title">Title!</h1>
+  <div class="buttons">
+    <button class="button">Right Button</button>
+  </div>
+</ion-header-bar>
+  <ion-content>
+    <!-- logged out view -->
+    <div ng-if="state.loggedIn == !true">
     <div class="row">
       <div class="col text-center">
         <h1>Welcome to Material Supply Hub.</h1>
@@ -8,25 +20,24 @@
     </div>
     <div class="row">
       <div class="col col-10"></div>
-      <div class="col col-40">
-          
-<ion-slide-box>
-    <ion-slide>
-      <div>   
-        <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="box blue">   
-        <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="box blue">   
-        <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
-      </div>
-    </ion-slide>
-  </ion-slide-box>
+      <div class="col col-40">    
+      <ion-slide-box>
+          <ion-slide>
+            <div>   
+              <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box blue">   
+              <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box blue">   
+              <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
         </div>
         <div class="col col-30"> 
           <h2>Login</h2>
@@ -46,5 +57,23 @@
         </div>
         <div class="col col-10"></div>
      </div>
+</div>
+ <!-- /logged out view -->
+ <!-- logged in -->
+<div ng-if="state.loggedIn == true">
+     
+        <div class="row">
+            <div class="col">Welcome <strong>{{ userName }}</strong></div>
+        </div>
+        <div class="row">
+            <div class="col col-75">
+                <div class="col col-25">data</div>
+                <div class="col col-25">data</div>
+                <div class="col col-25">data</div>
+                <div class="col col-25">data</div>
+            </div>
+        </div>
+</div>
+<!-- /logged in view -->
   </ion-content>
 </ion-view>

@@ -19,7 +19,6 @@ angular.module('starter.controllers', [])
     return username;
   } )();*/
 
-  $scope.userName = '';
 
   $scope.state = {
     loggedIn: false
@@ -29,6 +28,15 @@ angular.module('starter.controllers', [])
 
   setUsername();
 
+  // $scope.setUsername = function() {
+  //   if ( $scope.state.loggedIn == true ) {
+  //     $scope.userName = $scope.loginData.username;
+  //     console.log("user Ctrl says yes login is " + $scope.state.loggedIn)
+  //   } else {
+  //     $scope.userName = 'please login';
+  //     console.log("user Ctrl says no login is " + $scope.state.loggedIn)
+  //   }
+  // }
 
   function setUsername (){ 
       if ( $scope.state.loggedIn == true ) {
@@ -38,16 +46,16 @@ angular.module('starter.controllers', [])
       $scope.userName = 'please login';
       console.log("user Ctrl says no login is " + $scope.state.loggedIn)
     }
-  };
+  }
 
   //slide controller
   $scope.nextSlide = function() {
     $ionicSlideBoxDelegate.next();
   }
-
+  
   // Form data for the login modal
   $scope.loginData = {};
-  $scope.loggedinView = ('templates/user-home.html')
+  //$scope.loggedinView = ('templates/user-home.html')
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -66,24 +74,29 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
+  $scope.profileLink = function(){
+    if ($scope.state.loggedIn == false){
+      $scope.login();
+    } else {
+      $scope.logout();
+    }
+  };
+
   // log the user out
-  $scope.logout = function() {
+  $scope.logout = function(username) {
     $scope.state.loggedIn = false;
-    $state.transitionTo('app.loggedOut');
+    //$state.transitionTo('app.loggedOut');
+    setUsername(username);
   }
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function(username) {
-
     if  (($scope.loginData.username == 'demo') && ($scope.loginData.password == '1234')) {
       //$scope.userName = $scope.loginData.username;   
-      
-      
       $scope.state.loggedIn = true;
-      setUsername();
+      setUsername(username);
       console.log("welcome " + ' ' + $scope.userName + ' ' + $scope.state.loggedIn );
       $state.transitionTo('app.loggedIn');
-      
     } else {
       console.log("error - wrong login brah!" + ' ');
     }
@@ -110,34 +123,20 @@ angular.module('starter.controllers', [])
 })
 
 .controller('homeCtrl', function($scope){
-});
+})
 
-/* .controller('userCtrl', function($scope){
-  if ( $scope.loggedIn == true ) {
-    $scope.userName = $scope.loginData.username;
-    console.log("user Ctrl says yes login is " + $scope.loggedIn)
-  } else {
-    $scope.userName = 'please login';
-    console.log("user Ctrl says nope login is " + $scope.loggedIn)
+.controller('profileCtrl', function($scope){
+  $scope.profile = {
+    company: 'ACME Construction',
+    address1: '1234 Main Street',
+    address2: 'Suite 200',
+    city: 'Anytown',
+    state: 'New York',
+    zip: '12345-1234',
+    username: 'demo',
+    firstName: 'Harrison',
+    lastName: 'Ford',
+    phone: '(212) 555-5555',
+    email: 'hford@acme.com'
   }
-});*/
-
-/*.controller('userCtrl', function($scope){
-      if ( $scope.state.loggedIn = true ) {
-      $scope.userName = $scope.loginData.username;
-      console.log("user Ctrl says yes login is " + $scope.loggedIn)
-    } else {
-      $scope.userName = 'please login';
-      console.log("user Ctrl says nope login is " + $scope.loggedIn)
-    }
-})*/
-
-/* $setUsername = function($scope) {
-      if ( $scope.state.loggedIn = true ) {
-      $scope.userName = $scope.loginData.username;
-      console.log("user Ctrl says yes login is " + $scope.loggedIn)
-    } else {
-      $scope.userName = 'please login';
-      console.log("user Ctrl says nope login is " + $scope.loggedIn)
-    }
-  };*/
+});
