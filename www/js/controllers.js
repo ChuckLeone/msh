@@ -9,16 +9,6 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  /*$scope.userName = (function(userName) {
-    
-   if (userName !== null ) {
-      var username = 'Please Login';
-    console.log("generate a name" + ' ' + username);
-    return username;
-   } else 
-    return username;
-  } )();*/
-
 
   $scope.state = {
     loggedIn: false
@@ -27,16 +17,6 @@ angular.module('starter.controllers', [])
   $scope.$location;
 
   setUsername();
-
-  // $scope.setUsername = function() {
-  //   if ( $scope.state.loggedIn == true ) {
-  //     $scope.userName = $scope.loginData.username;
-  //     console.log("user Ctrl says yes login is " + $scope.state.loggedIn)
-  //   } else {
-  //     $scope.userName = 'please login';
-  //     console.log("user Ctrl says no login is " + $scope.state.loggedIn)
-  //   }
-  // }
 
   function setUsername (){ 
       if ( $scope.state.loggedIn == true ) {
@@ -47,7 +27,9 @@ angular.module('starter.controllers', [])
       console.log("user Ctrl says no login is " + $scope.state.loggedIn)
     }
   }
-
+  
+  //$scope.requests = {}
+  
   //slide controller
   $scope.nextSlide = function() {
     $ionicSlideBoxDelegate.next();
@@ -95,8 +77,6 @@ angular.module('starter.controllers', [])
       //$scope.userName = $scope.loginData.username;   
       $scope.state.loggedIn = true;
       setUsername(username);
-      console.log("welcome " + ' ' + $scope.userName + ' ' + $scope.state.loggedIn );
-      $state.transitionTo('app.loggedIn');
     } else {
       console.log("error - wrong login brah!" + ' ');
     }
@@ -122,10 +102,10 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams, $state) {
 })
 
-.controller('homeCtrl', function($scope){
+.controller('HomeCtrl', function($scope){
 })
 
-.controller('profileCtrl', function($scope){
+.controller('ProfileCtrl', function($scope, $stateParams, $state){
   $scope.profile = {
     company: 'ACME Construction',
     address1: '1234 Main Street',
@@ -139,4 +119,26 @@ angular.module('starter.controllers', [])
     phone: '(212) 555-5555',
     email: 'hford@acme.com'
   }
+})
+
+.controller('TypesCtrl', function($scope, $stateParams, Types){
+ $scope.types = Types.all();
+})
+
+.controller('TypeCtrl', function($scope, $stateParams, Types, Requests){
+  $scope.requests = Requests.all($stateParams.typeId);	
+})
+
+.controller('RequestsCtrl', function($scope, Requests){
+  $scope.requests = Requests.all();	
+})
+
+.controller('RequestCtrl', function($scope, Requests) {
+   $scope.requests = Requests.all();	
+})
+
+.controller('RequestDetailsCtrl', function($scope, $stateParams, Requests) {
+  $scope.request = Requests.get($stateParams.requestId);
+        console.log($scope.request);
+   
 });

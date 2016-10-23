@@ -4,9 +4,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform) {
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'ngStorage'])
+
+.run(function($ionicPlatform, Requests) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -37,7 +38,28 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/search.html',
+        controller: 'TypesCtrl'
+      }
+    }
+  })
+
+  .state('app.type', {
+    url: '/types/:typeId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/type.html',
+        controller: 'TypeCtrl'
+      }
+    }
+  })
+
+  .state('app.request', {
+    url: '/requests/:requestId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/request.html',
+        controller: 'RequestDetailsCtrl'
       }
     }
   })
@@ -58,7 +80,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/profile',
       views: {
         'menuContent': {
-          templateUrl: 'templates/profile.html'
+          templateUrl: 'templates/profile.html',
+          controller: 'ProfileCtrl'
         }
       }
   })
@@ -67,7 +90,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/create-profile',
       views: {
         'menuContent': {
-          templateUrl: 'templates/create-profile.html'
+          templateUrl: 'templates/create-profile.html',
+          controller: 'ProfileCtrl'
         }
       }
   })

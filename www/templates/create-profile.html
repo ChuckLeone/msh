@@ -1,6 +1,7 @@
 <ion-view>
     
   <ion-content>
+    <div  ng-if="state.loggedIn == !true">
     <div class="row">
         <div class="col"><h2>Create a Profile</h2></div>
      </div>  
@@ -86,6 +87,15 @@
              </div>
             </form>
          </div>
+        </div>
+        <div ng-if="state.loggedIn == true">
+            <div class="row">
+                <div class="col">
+                    <h2>Welcome back, {{profile.username}}</h2>
+                    Click <a href="#/app/profile">here</a> to view your profile
+                </div>
+            </div>
+        </div>
   
   
   </ion-content>
