@@ -88,28 +88,16 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams, $state) {
-})
-
 .controller('HomeCtrl', function($scope){
 })
 
-.controller('CreateProposalCtrl', function($scope){
+.controller('ProposalCtrl', function($scope, $state){
   $scope.proposal = {
     title: '',
     description: '',
-    dueDate: ''
+    dueDate: '',
+    poNumber: '',
+    items: []
   };
 
   $scope.items = [];
@@ -125,6 +113,17 @@ angular.module('starter.controllers', [])
      newRow.append($scope.template);
   };
 
+  $scope.saveProposal = function () {
+    $scope.proposal = {
+      title: $scope.proposal.title,
+      description: $scope.proposal.description,
+      duteDate: $scope.proposal.dueDate,
+      poNumber: $scope.proposal.poNumber,
+      items: $scope.proposal.items
+    }
+    console.log("proposal saved");
+  };
+
   $scope.saveItem = function () {
     $scope.items.push({
       materialType: $scope.proposal.item.materialType, 
@@ -137,8 +136,10 @@ angular.module('starter.controllers', [])
   };
 
   $scope.createProposal = function() {
-    $scope.saveItem();
+    $scope.saveProposal();
+    // $scope.saveItem();
     console.log("form submitted");
+    $state.transitionTo('app.reviewProposal');
   };
 })
 
