@@ -1,0 +1,49 @@
+<ion-view>
+  <ion-content>
+    <form>
+    <div class="row">
+      <div class="col col-100">    
+        <h1>Create a New Proposal</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Details</h3>
+                  <label for="proposal-title">
+                    <span class="input-label">Proposal Title</span>
+                     <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title">
+                    </label>
+                    <label for="proposal-description">
+                        <span class="input-label">Description</span>
+                        <textarea name="proposal-description" id="proposal-description" ng-model="proposal.description"></textarea>
+                    </label>
+                     <label for="request-due-date">
+                        <span class="input-label">Due Date</span>
+                        <input type="date" vname="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate">
+                    </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><h3>Items</h3></div>
+    </div>
+    <div id="items" ng-include="template.url"></div>
+    <div class="row">
+                <div class="col">
+                    <section>
+                        <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
+                    </section>
+                </div>
+        </div>
+        <div class="row lastRow">
+            <div class="col">
+                <section>
+                    <button class="button button-block button-positive" ng-click="createProposal()">Review and Submit</button>
+                </section>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </ion-content>
+</ion-view>

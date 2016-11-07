@@ -1,0 +1,44 @@
+<div class="row">
+                <div class="col">
+                    <label for="item-material-type">
+                        <span class="input-label">Material Type:</span>
+                    <select name="item-material-type" id="item-material-type" ng-model="proposal.item.materialType">
+                        <option value="steel">Steel</option>
+                        <option value="aluminum">Aluminum</option>
+                        <option value="iron">Iron</option>
+                    </select>
+                    </label>
+                </div>
+                <div class="col">
+                    <label for="item-process">
+                        <span class="input-label">Process:</span>
+                    <select name="item-process" id="item-process" ng-model="proposal.item.process">
+                        <option value="carbon steel">Carbon Steel</option>
+                        <option value="cast aluminum">Cast Aluminum</option>
+                        <option value="cast iron">Cast Iron</option>
+                    </select>
+                    </label>
+                </div>
+                <div class="col">
+                    <label for="item-specifications">
+                        <span class="input-label">Specifications:</span>
+                    <select name="item-specifications" id="item-specifications" ng-model="proposal.item.specifications">
+                        <option value="specification1">specification 1</option>
+                        <option value="specification2">specification 2</option>
+                        <option value="specification3">specification 3</option>
+                    </select>
+                    </label>
+                </div>
+                <div class="col">
+                    <label for="item-quantity">
+                        <span class="input-label">Quantity:</span>
+                    <input type="number" name="item-quantity" id="item-quantity" ng-model="proposal.item.quantity">
+                    </label>
+                </div>
+                 <div class="col">
+                    <label for="item-unit-price">
+                        <span class="input-label">Unit Price:</span>
+                    <input type="number" name="item-unit-price" id="item-unit-price" ng-model="proposal.item.unitPrice">
+                    </label>
+                </div>       
+        </div>

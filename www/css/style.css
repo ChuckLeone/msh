@@ -23,3 +23,7 @@ legend {
     font-size: 18px;
     font-weight: bold;
 }
+
+.lastRow {
+    border-top: 1px solid gray;
+}

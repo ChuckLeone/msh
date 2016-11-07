@@ -64,6 +64,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('app.createProposal', {
+      url: '/create-proposal',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/create-proposal.html',
+          controller: 'CreateProposalCtrl'
+        }
+      }
+  })
+
   .state('app.home', {
       url: '/home',
       views: {

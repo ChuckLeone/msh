@@ -105,6 +105,43 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($scope){
 })
 
+.controller('CreateProposalCtrl', function($scope){
+  $scope.proposal = {
+    title: '',
+    description: '',
+    dueDate: ''
+  };
+
+  $scope.items = [];
+
+  $scope.getTotalItems = function () {
+    return $scope.items.length;
+  };
+
+  $scope.addItem = function () {
+    var proposalItemTemplate = { url: '../templates/proposal-item.html'};
+     var newRow = angular.element( document.querySelector( '#items' ) );
+     $scope.template = proposalItemTemplate;
+     newRow.append($scope.template);
+  };
+
+  $scope.saveItem = function () {
+    $scope.items.push({
+      materialType: $scope.proposal.item.materialType, 
+      process: $scope.proposal.item.process, 
+      specifications: $scope.proposal.item.specifications,
+      quantity: $scope.proposal.item.quantity,
+      unitPrice: $scope.proposal.item.unitPrice
+    });
+    $scope.proposal.item.materialType = '';
+  };
+
+  $scope.createProposal = function() {
+    $scope.saveItem();
+    console.log("form submitted");
+  };
+})
+
 .controller('ProfileCtrl', function($scope, $stateParams, $state){
   $scope.profile = {
     company: 'ACME Construction',
