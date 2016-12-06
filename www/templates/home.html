@@ -12,13 +12,13 @@
   <ion-content>
     <!-- logged out view -->
     <div ng-if="state.loggedIn == !true">
-    <div class="row">
+    <div class="row responsive-sm">
       <div class="col text-center">
         <h1>Welcome to Material Supply Hub.</h1>
           <p>The connection hub for material manufacturers and suppliers</p>
        </div>
     </div>
-    <div class="row">
+    <div class="row responsive-sm">
       <div class="col col-10"></div>
       <div class="col col-40">    
       <ion-slide-box>
@@ -61,16 +61,93 @@
  <!-- /logged out view -->
  <!-- logged in -->
 <div ng-if="state.loggedIn == true">
-     
-        <div class="row">
-            <div class="col">Welcome <strong>{{ userName }}</strong></div>
+        <div ng-controller="ProfileCtrl">
+              <!-- -->
+              <div class="list card">
+                <div class="item item-avatar">
+                   <img ng-src={{profile.face}} class="user-avatar" />
+                  <h2>{{ profile.firstName }}</h2>
+                  <p> {{ profile.company }}</p>
+                </div>
+                <div class="item-body">
+                  <p>
+                    <span class="padding-horizontal">
+                      <span class="badge badge-assertive">3</span>
+                      <a class="button icon-left ion-ios-email button-clear button-dark" href="#">Messages</a>
+                    </span>
+                    <span class="padding-horizontal">
+                      <span class="badge badge-assertive">1</span>
+                    <a class="button icon-left ion-ios-bell button-clear button-dark" href="#">Alerts</a>
+                    </span>
+                    <span class="padding-horizontal">
+                    <a class="button icon-left ion-ios-person button-clear button-dark" href="#/app/profile">View My Profile</a>
+                    </span>
+                  </p>
+                </div>
+              </div>
         </div>
-        <div class="row">          
-                <div class="col col-25">data</div>
-                <div class="col col-25">data</div>
-                <div class="col col-25">data</div>
-                <div class="col col-25">data</div>
+              <!-- -->
+
+        <div>
+        <!-- communications stuff goes here -->
         </div>
+          <div class="list card">
+            <div class="item item-divider">My Proposals</div>
+            <div>
+                  <ion-list ng-controller="ProposalsCtrl">
+                    <a class="item item-icon-left calm" href="#/app/create-proposal">
+                      <i class="icon ion-ios-plus"></i>
+                        New Proposal
+                   </a>
+                      <ion-item class="item-remove-animate item-avatar item-icon-right" 
+                          ng-repeat="proposal in proposals" 
+                          type="item-text-wrap" 
+                          href="#/app/proposals/{{proposal.id}}">
+                          <img ng-src="{{proposal.face}}">
+                          <h2>{{proposal.title}}</h2>
+                          <p>{{proposal.type}} <span class="right strong">{{proposal.amount | currency}}</span></p>
+                          <p>Status {{proposal.status}}</p>
+                          <i class="icon ion-chevron-right icon-accessory"></i>
+                      </ion-item>
+                  </ion-list>
+            </div>
+          </div>
+          
+        <!-- pending approval
+        <div class="list card" data-ng="(requests | filter: { status: 'pending'}).length > 0">
+            <div class="item item-divider">Pending Approval</div>
+            <div>
+                  <ion-list ng-controller="RequestsCtrl">
+                      <ion-item class="item-remove-animate item-avatar item-icon-right" 
+                          ng-repeat="request in requests | filter: { status: 'pending' }" 
+                          type="item-text-wrap" 
+                          href="#/app/requests/{{request.id}}">
+                          <img ng-src="{{request.face}}">
+                          <h2>{{request.title}}</h2>
+                          <p>{{request.type}} <span class="right strong">{{request.amount | currency}}</span></p>
+                          <i class="icon ion-chevron-right icon-accessory"></i>
+                      </ion-item>
+                  </ion-list>
+            </div>
+          </div> -->
+           <!-- approved 
+          <div class="list card" data-ng="(requests | filter: { status: 'approved'}).length > 0">
+            <div class="item item-divider">Recently Approved</div>
+            <div>
+                  <ion-list ng-controller="RequestsCtrl">
+                      <ion-item class="item-remove-animate item-avatar item-icon-right" 
+                          ng-repeat="request in requests | filter: { status: 'approved' }" 
+                          type="item-text-wrap" 
+                          href="#/app/requests/{{request.id}}">
+                          <img ng-src="{{request.face}}">
+                          <h2>{{request.title}}</h2>
+                          <p>{{request.type}} <span class="right strong">{{request.amount | currency}}</span></p>
+                          <i class="icon ion-chevron-right icon-accessory"></i>
+                      </ion-item>
+                  </ion-list>
+            </div>
+          </div> -->
+          
 </div>
 <!-- /logged in view -->
   </ion-content>

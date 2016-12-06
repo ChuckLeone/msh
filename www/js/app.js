@@ -55,6 +55,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   })
 
   .state('app.request', {
+    url: '/requests',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/request.html',
+        controller: 'RequestCtrl'
+      }
+    }
+  })
+
+  .state('app.request-details', {
     url: '/requests/:requestId',
     views: {
       'menuContent': {
@@ -64,12 +74,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('app.createProposal', {
+  .state('app.create-proposal', {
       url: '/create-proposal',
       views: {
         'menuContent': {
           templateUrl: 'templates/create-proposal.html',
-          controller: 'CreateProposalCtrl'
+          controller: 'NewProposalCtrl'
+        }
+      }
+  })
+
+  .state('app.review-proposal', {
+      url: '/proposals/:proposalId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/review-proposal.html',
+          controller: 'ProposalDetailsCtrl'
+        }
+      }
+  })
+
+  .state('app.select-vendors', {
+      url: '/proposals/:proposalId/vendors',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/review-vendors.html',
+          controller: 'ProposalVendorsCtrl'
         }
       }
   })
@@ -110,7 +140,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         url: '/home',
         views: {
           'menuContent': {
-            templateUrl: 'templates/home.html'
+            templateUrl: 'templates/home.html',
+            controller: 'HomeCtrl'
           }
         }
     })
@@ -119,7 +150,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         url: '/home',
         views: {
           'menuContent': {
-            templateUrl: 'templates/home.html'
+            templateUrl: 'templates/home.html',
+            controller: 'HomeCtrl'
           }
         }
     })

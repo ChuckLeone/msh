@@ -9,44 +9,61 @@
     <div class="row">
         <div class="col">
             <h3>Details</h3>
-                  <label for="proposal-title">
+                  <label for="proposal-title" class="item item-input">
                     <span class="input-label">Proposal Title</span>
-                     <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title">
+                     <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title" size="50">
                     </label>
-                    <label for="proposal-description">
+                    <label for="proposal-description" class="item item-input">
                         <span class="input-label">Description</span>
-                        <textarea name="proposal-description" id="proposal-description" ng-model="proposal.description"></textarea>
+                        <textarea name="proposal-description" id="proposal-description" ng-model="proposal.description" rows="4" cols="80"></textarea>
                     </label>
-                     <label for="request-due-date">
+                     <label for="request-due-date" class="item item-input">
                         <span class="input-label">Due Date</span>
-                        <input type="date" vname="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate">
+                        <input type="date" name="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate">
                     </label>
-                     <label for="request-po-number">
+                     <label for="request-po-number" class="item item-input">
                         <span class="input-label">PO Number</span>
-                        <input type="number" vname="proposal-po-number" id="proposal-po-number" ng-model="proposal.poNumber">
+                        <input type="number" name="proposal-po-number" id="proposal-po-number" ng-model="proposal.poNumber">
                     </label>
         </div>
     </div>
-    <div class="row">
+   <div class="row">
         <div class="col"><h3>Items</h3></div>
     </div>
-    <div id="items" ng-include="template.url"></div>
     <div class="row">
-                <div class="col">
-                    <section>
-                        <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
-                    </section>
-                </div>
+        <div class="col">
+                <ion-item ng-repeat="item in proposal.items">
+                    <p>Material Type: <span class="item-note">{{item.materialType}}</span></p>
+                    <p>Process: <span class="item-note">{{item.process}}</span></p>
+                    <p>Specifications: <span class="item-note">{{item.specifications}}</span></p>
+                    <p>Description: <span class="item-note">{{item.description}}</span></p>
+                    <p>Weight: <span class="item-note">{{item.weight}}</span></p>
+                    <p>Length: <span class="item-note">{{item.length}}</span></p>
+                    <p>Width: <span class="item-note">{{item.width}}</span></p>
+                    <p>Quantity: <span class="item-note">{{item.quantity}}</span></p>
+                    <p>Unit Price: <span class="item-note">{{item.unitPrice | currency }}</span></p>
+                    <hr />
+                    <p>Note:</p>
+                    <p>{{item.note}}</p>
+                </ion-item>
         </div>
-        <div class="row lastRow">
-            <div class="col">
-                <section>
-                    <button class="button button-block button-positive" ng-click="createProposal()">Review and Submit</button>
-                </section>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <section>
+                <button class="button button-block button-stable" 
+                    ng-click="addItem()">Add Item</button>
+            </section>
         </div>
+    </div>
+    <div class="row lastRow">
+        <div class="col" ng-controller="ProposalsCtrl">
+            <section>
+                <a href="#/app/proposals/{{proposal.id}}" 
+                    class="button button-block button-positive" 
+                    ng-click="createProposal()">Review and Submit</a>
+            </section>
         </div>
-      </div>
     </div>
     </form>
   </ion-content>

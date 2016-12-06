@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicSlideBoxDelegate, $state, $stateParams, $location) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicSlideBoxDelegate, $state, $stateParams, $location, Proposals) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -88,58 +88,125 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope){
+.controller('HomeCtrl', function($scope, $state, $filter, Proposals, Requests, Vendors){
+   $scope.proposals = Proposals.all($scope.proposals);
+   $scope.requests = Requests.all($scope.requests); 
+   $scope.pendingRequests = $scope.requests;
+   $scope.pending = $filter('filter')($scope.requests, {status : 'approved'})[0];
+   $scope.clear = Proposals.clear();
 })
 
-.controller('ProposalCtrl', function($scope, $state){
-  $scope.proposal = {
-    title: '',
-    description: '',
-    dueDate: '',
-    poNumber: '',
-    items: []
-  };
+.controller('ProposalCtrl', function($scope, $state, Proposals){
+  $scope.proposals = Proposals.all();
+})
 
-  $scope.items = [];
+.controller('NewProposalCtrl', function($scope, $state, $ionicModal, Proposals, Items, Vendors){
+  function setId() {
+			var ids = Proposals.all();
+			return id = ids.length + 1;
+		}
+  $scope.proposal = {
+      id: setId(),
+      title: '',
+      description: '',
+      dueDate: '',
+      poNumber: '',
+      face:  '',
+      items: [],
+      vendors: [],
+      status: ''
+  }
+
+  $scope.proposals = Proposals.all(); 
+  $scope.newProposal = function () {
+    $scope.proposal = {
+      id: '',
+      title: '',
+      description: '',
+      dueDate: '',
+      poNumber: '',
+      contact: '',
+      face: '',
+      items: $scope.items,
+      vendors: $scope.vendors,
+      status: ''
+    };
+  }
+
+  $scope.proposal.items = [];
+  $scope.proposal.vendors = [];
 
   $scope.getTotalItems = function () {
     return $scope.items.length;
   };
 
-  $scope.addItem = function () {
-    var proposalItemTemplate = { url: '../templates/proposal-item.html'};
-     var newRow = angular.element( document.querySelector( '#items' ) );
-     $scope.template = proposalItemTemplate;
-     newRow.append($scope.template);
-  };
+  // modal for add item
+  $ionicModal.fromTemplateUrl('templates/proposal-add-item.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
 
-  $scope.saveProposal = function () {
-    $scope.proposal = {
-      title: $scope.proposal.title,
-      description: $scope.proposal.description,
-      duteDate: $scope.proposal.dueDate,
-      poNumber: $scope.proposal.poNumber,
-      items: $scope.proposal.items
+
+  $scope.addItem = function() {
+    function setId() {
+			var ids = Items.all();
+			return id = ids.length + 1;
+		}
+    $scope.modal.show();
+    $scope.proposal.items.item = {
+      id: setId(),
     }
-    console.log("proposal saved");
+  }
+
+  $scope.reviewProposal = function (proposal) {
+    Proposals.add($scope.proposal);
+    Proposals.post(); 
+    $localStorage = Proposals.all(proposal);
+    $state.transitionTo('app.reviewProposal');
+    console.log(proposal);
   };
 
-  $scope.saveItem = function () {
-    $scope.items.push({
-      materialType: $scope.proposal.item.materialType, 
-      process: $scope.proposal.item.process, 
-      specifications: $scope.proposal.item.specifications,
-      quantity: $scope.proposal.item.quantity,
-      unitPrice: $scope.proposal.item.unitPrice
+  $scope.saveProposal = function(proposal) {
+		Proposals.add($scope.proposal);
+		Proposals.post();
+		$localStorage = Proposals.all(proposal);
+	};
+
+  $scope.saveItem = function (proposal) {
+    $scope.proposal.items.push({
+      id: $scope.proposal.items.item.id,
+      materialType: $scope.proposal.items.item.materialType, 
+      process: $scope.proposal.items.item.process, 
+      specifications: $scope.proposal.items.item.specifications,
+      description: $scope.proposal.items.item.description,
+      weight: $scope.proposal.items.item.weight,
+      length: $scope.proposal.items.item.length,
+      width: $scope.proposal.items.item.width,
+      quantity: $scope.proposal.items.item.quantity,
+      unitPrice: $scope.proposal.items.item.unitPrice,
+      note: $scope.proposal.items.item.note
     });
-    $scope.proposal.item.materialType = '';
+    
+    $scope.modal.hide();
   };
 
   $scope.createProposal = function() {
+    $scope.proposal = {
+      id: $scope.proposal.id,
+      title: $scope.proposal.title,
+      description: $scope.proposal.description,
+      dueDate: $scope.proposal.dueDate,
+      poNumber: $scope.proposal.poNumber,
+      contact: 'Harrison',
+      face: 'img/harrison.jpg',
+      items: $scope.proposal.items,
+      vendors: $scope.proposal.vendors,
+      status: 'pending'
+    };
+    $scope.proposal = this.proposal;
     $scope.saveProposal();
-    // $scope.saveItem();
-    console.log("form submitted");
-    $state.transitionTo('app.reviewProposal');
+    return this.proposal;
   };
 })
 
@@ -155,7 +222,8 @@ angular.module('starter.controllers', [])
     firstName: 'Harrison',
     lastName: 'Ford',
     phone: '(212) 555-5555',
-    email: 'hford@acme.com'
+    email: 'hford@acme.com',
+    face: 'img/harrison.jpg'
   }
 })
 
@@ -171,12 +239,43 @@ angular.module('starter.controllers', [])
   $scope.requests = Requests.all();	
 })
 
+.controller('ProposalsCtrl', function($scope, Proposals){
+  $scope.proposals = Proposals.all();	
+})
+
+.controller('ProposalVendorsCtrl', function($scope, $stateParams, $state, Proposals, Items, Vendors){
+  $scope.proposal = Proposals.get($stateParams.proposalId);
+  $scope.vendors = Vendors.all();
+//  console.log("current proposal = " + $scope.proposal.title);
+//   console.log("current vendors = " + $scope.vendors);
+
+  $scope.checked = [];
+
+  $scope.submitProposal = function(proposal) {
+    $state.transitionTo('app.home');
+
+    $scope.proposal.vendors = $scope.vendors;
+  }
+})
+
 .controller('RequestCtrl', function($scope, Requests) {
    $scope.requests = Requests.all();	
 })
 
 .controller('RequestDetailsCtrl', function($scope, $stateParams, Requests) {
   $scope.request = Requests.get($stateParams.requestId);
-        console.log($scope.request);
-   
+  console.log($scope.request);
+})
+
+.controller('ProposalDetailsCtrl', function($scope, $stateParams, $state, Proposals, Items, Vendors){
+  $scope.proposal = Proposals.get($stateParams.proposalId);
+   console.log("current proposal = " + $scope.proposal);
+  $scope.remove = function(proposal) {
+    Proposals.remove(proposal);
+    $state.transitionTo('app.home');
+  }
+ $scope.selectVendors = function() {
+    $state.transitionTo('app.select-vendors');
+    console.log("select vendors");
+  }
 });

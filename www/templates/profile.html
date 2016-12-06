@@ -18,7 +18,19 @@
                 <div class="col"><h2>My Profile</h2></div>
             </div>
             <div class="row">
-                <div class="col col-75">
+               
+                <div class="col col-50">
+                    <h3>Contact Info</h3>
+                    <span>
+                        <p>{{ profile.firstName }} {{ profile.lastName }}</p>
+                        <p>{{ profile.phone }}</p>
+                        <p>{{ profile.email }}</p>
+                    </span>
+                     <span>
+                        <img ng-src={{profile.face}} class="user-avatar" />
+                    </span>
+                </div>
+                 <div class="col col-50">
                     <h3>Company</h3>
                     <p>{{ profile.company }}</p>
                     <p>{{ profile.address1 }}</p>
@@ -28,12 +40,6 @@
                     <h3>Account Info</h3>
                     <p><strong>Username</strong></p>
                     <p>{{ userName }}</p>
-                </div>
-                <div>
-                    <h3>Contact Info</h3>
-                    <p>{{ profile.firstName }} {{ profile.lastName }}</p>
-                    <p>{{ profile.phone }}</p>
-                    <p>{{ profile.email }}</p>
                 </div>
             </div>
         </div>

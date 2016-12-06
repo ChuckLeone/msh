@@ -1,6 +1,5 @@
 <ion-view>
   <ion-content>
-    <form>
     <div class="row">
       <div class="col col-100">    
         <h1>Review Proposal</h1>
@@ -9,40 +8,81 @@
     <div class="row">
         <div class="col">
             <h3>Details</h3>
-                  <label for="proposal-title">
-                    <span class="input-label">Proposal Title</span>
-                     <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title">{{proposal.title}}
-                    </label>
-                    <label for="proposal-description">
-                        <span class="input-label">Description</span>
-                        <textarea name="proposal-description" id="proposal-description" ng-model="proposal.description">{{proposal.description}}</textarea>
-                    </label>
-                     <label for="request-due-date">
-                        <span class="input-label">Due Date</span>
-                        <input type="date" vname="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate">{{proposal.dueDate}}
-                    </label>
-                     <label for="request-po-number">
-                        <span class="input-label">PO Number</span>
-                        <input type="number" vname="proposal-po-number" id="proposal-po-number" ng-model="proposal.poNumber">{{proposal.poNumber}}
-                    </label>
+            <p><strong>Requester:</strong> 
+              <span>{{proposal.contact}}</span>
+            </p>
+            <p><strong>Title:</strong> {{proposal.title}}</p>
+            <p><strong>Description:</strong> {{proposal.description}}</p>
+            <p><strong>Due Date:</strong> {{proposal.dueDate}}</p>
+            <p><strong>PO Number:</strong> {{proposal.poNumber}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col"><h3>Items</h3></div>
     </div>
     <div class="row">
-        <div class="col">{{proposal.items}}</div>
-    </div>
+                <div class="col">
+                   <ion-item ng-repeat="item in proposal.items">
+                       <p>Material Type: <span class="item-note">{{item.materialType}}</span></p>
+                       <p>Process: <span class="item-note">{{item.process}}</span></p>
+                       <p>Specifications: <span class="item-note">{{item.specifications}}</span></p>
+                       <p>Descriptionm: <span class="item-note">{{item.description}}</span></p>
+                       <p>Weight: <span class="item-note">{{item.weight}}</span></p>
+                       <p>Length: <span class="item-note">{{item.length}}</span></p>
+                       <p>Width: <span class="item-note">{{item.width}}</span></p>
+                       <p>Quantity: <span class="item-note">{{item.quantity}}</span></p>
+                       <p>Unit Price: <span class="item-note">{{item.unitPrice}}</span></p>
+                       <hr>
+                       <p><strong>Note:</strong><p>
+                       <p>{{item.note}}</span></p>  
+                    </ion-item>
+                </div>
+        </div>
+        <!-- -->
         <div class="row">
-            <div class="col">
-                <section>
-                    <button class="button button-block button-positive" ng-click="createProposal()">Submit Proposal</button>
-                </section>
-            </div>
-        </div>
-        </div>
-      </div>
+        <div class="col"><h3>Vendors</h3></div>
     </div>
-    </form>
+    <span ng-if="(proposal.vendors).length > 0">
+        <div class="row">
+            <!--<div class="row">-->
+                <div class="col">
+                   <ion-item ng-repeat="vendor in proposal.vendors">
+                       <p>Vendor: <span class="item-note">{{vendor.company}}</span></p>
+                       <p>Contact Name: <span class="item-note">{{vendor.contact}}</span>
+                       <p>Materials Supplied: <span class="item-note">{{vendor.materialType}}</span>
+                       <form>
+                           <input type="checkbox" checked />
+                           <label>Include on proposal</label>
+                        </form>
+                        </p>
+                    </ion-item>
+                </div>
+        </div>
+    </span>
+    <!-- -->
+    <span ng-if="(proposal.vendors).length === 0">
+            <div class="row">
+                <div class="col">
+                    <section>
+                        <a  href="#/app/proposals/{{proposal.id}}/vendors" class="button button-block button-positive" ng-click="selectVendors()">Select Vendors</a>
+                    </section>
+                </div>
+            </div>
+    </span>
+    <div class="row">
+                <div class="col">
+                    <section>
+                        <button class="button button-block button-outline button-assertive" ng-click="remove()">Cancel Proposal</button>
+                    </section>
+                </div>
+    </div>
+    <!--<div class="row">
+                <div class="col">
+                    <section>
+                        {{proposal}}
+                    </section>
+                </div>
+    </div>-->
+    
   </ion-content>
 </ion-view>

@@ -10,7 +10,11 @@
         
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <button class="button button-dark button-clear" ng-click="profileLink()"><i class="icon ion-person"></i> {{ userName }}</button>
+        <button class="button button-dark button-clear" ng-click="profileLink()" data-ng-controller="ProfileCtrl">
+          <span ng-if="!state.loggedIn == true"><i class="icon ion-person"></i>{{ userName }}</span> 
+          <span ng-if="state.loggedIn == true"><img ng-src={{profile.face}} class="user-avatar-sm" /> {{ userName }}</span> 
+          
+        </button>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>

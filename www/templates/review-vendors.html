@@ -1,0 +1,79 @@
+<ion-view>
+  <ion-content>
+    <div class="row">
+      <div class="col col-100">    
+        <h1>Review Vendors</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Details</h3>
+            <p>Title: {{proposal.title}}</p>
+            <p>PO Number: {{proposal.poNumber}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><h3>Matching Vendors</h3></div>
+    </div>
+    <form>
+    <div class="row" ng-controller="ProposalVendorsCtrl">
+                <div class="col">
+                   <ion-item ng-repeat="vendor in vendors | filter: { materialType: 'steel' }">
+                       <p>Vendor: <span class="item-note">{{vendor.company}}</span></p>
+                       <p>ID: <span class="item-note">{{vendor.id}}</span>
+                       <p>Contact Name: <span class="item-note">{{vendor.contact}}</span>
+                       <p>Materials Supplied: <span class="item-note">{{vendor.materialType}}</span>
+                       <p>Process Supplied: <span class="item-note">{{vendor.processType}}</span>
+                       <p>
+                           <input type="checkbox" ng-model="include" ng-checked="vendor.include" />
+                           <label>Include on proposal</label>
+                       
+                        </p>
+                    </ion-item>
+                </div>
+    </div>
+    <div class="row">
+        <div class="col"><h3>Add a Vendor</h3></div>
+    </div>
+    <div class="row">
+                <div class="col">
+                   <ion-item>     
+                       <label for="newVendor-company" class="item item-input">
+                            <span class="input-label">Company</span>
+                            <input type="text" ng-model="newVendor.company" name="newVendor-company" id="newVendor-company" size="50">
+                      </label>
+                      <label for="newVendor-contact" class="item item-input">
+                            <span class="input-label">Contact</span>
+                            <input type="text" ng-model="newVendor.contact" name="newVendor-contact" id="newVendor-contact" size="50">
+                      </label>
+                      <label for="newVendor-email" class="item item-input">
+                            <span class="input-label">Email Address</span>
+                            <input type="text" ng-model="newVendor.email" name="newVendor-email" id="newVendor-email" size="50">
+                      </label>
+                       <label for="newVendor-location" class="item item-input">
+                            <span class="input-label">Location</span>
+                            <input type="text" ng-model="newVendor.location" name="newVendor-location" id="newVendor-location" size="50">
+                      </label>
+                    </ion-item>
+                </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <section>
+                <button class="button button-block button-positive" ng-click="submitProposal()">Submit Proposal</button>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <section>
+                <button class="button button-block button-outline button-assertive" ng-click="remove()">Cancel Proposal</button>
+            </section>
+        </div>
+    </div>
+    </form>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

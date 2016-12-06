@@ -27,3 +27,30 @@ legend {
 .lastRow {
     border-top: 1px solid gray;
 }
+
+.user-avatar {
+    max-height: 200px;
+    border-radius: 100%;
+}
+
+.user-avatar-sm {
+    max-height: 32px;
+    border-radius: 100%;
+}
+
+.request-avatar {
+    max-height: 32px;
+    border-radius: 100%;
+}
+
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+    border: 1px solid #999;
+    border-radius: 2px;
+    padding: 5px;
+    max-width: 380px;
+}
+
+input[type="number"] {
+   max-width: 100px;
+}
