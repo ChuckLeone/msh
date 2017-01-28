@@ -27,32 +27,36 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="js/ng-cordova.min.js"></script>
-    <script src="cordova.js"></script>
-
     <!-- your app's js -->
     <script src="js/ngStorage.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="js/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+
+   <!-- third party -->
+   <script src="https://use.fontawesome.com/ddc63c54c2.js"></script>
   </head>
 
   <body ng-app="starter">
-    <header>
-      <div class="bar bar-header bar-dark">
-          <div class="row">
-              <div class="col col-80"><i class="icon ion-gear-a"></i> Material Supply Hub</div>
-              <div class="col col-20" data-ng-controller="AppCtrl"></div>
-            </ion-row>
-          </div>
-      </header>
+    <ion-header-bar class="bar-dark site-header">
+            <div class="col"><a class="branding" href="#/"><i class="icon ion-gear-a logo"></i></a> <span class="branding">Material Supply Hub</span></div>
+            <div class="col item-input-inset">
+                  <label class="item-input-wrapper">
+                  <i class="icon ion-ios-search placeholder-icon"></i>
+                  <input type="search" placeholder="Search">
+                </label>
+            </div>
+      </ion-header-bar>
     <ion-nav-view></ion-nav-view>
-    <!--<div class="bar bar-footer bar-stable">
+    <ion-footer-bar class="bar-stable">
       <div class="title">
         <span class="left"><a href="#/app/home">Home</a>  |  <a href="#/app/about">About MSH</a></span>
         <span class="right">Copyright 2016 Material Supply Hub</span>
       </div>
-    </div>-->
+    </ion-footer-bar>
   </body>
 </html>

@@ -23,40 +23,57 @@
     <ion-header-bar class="bar-stable"></ion-header-bar>
     <ion-content>
       <!-- logged out menu -->
-      <ion-list ng-show="!state.loggedIn == true"> 
+      <ion-list class="list" ng-show="!state.loggedIn == true"> 
         <ion-item menu-close href="#/app/home">
-          Home
+          <i class="fa fa-home"></i> Home
         </ion-item>
         <ion-item menu-close ng-click="login()" ng-show="!state.loggedIn == true">
-          Login
+          <i class="fa fa-user-circle"></i> Login
         </ion-item>
         <ion-item menu-close href="#/app/search">
-          Browse
+          <i class="fa fa-search-plus"></i> Browse
         </ion-item>
         <ion-item menu-close href="#/app/create-profile">
-          Create a Profile
+          <i class="fa fa-user-plus"></i> Create a Profile
         </ion-item>
-        <ion-item menu-close href="#/app/about">
-          About MSH
-        </ion-item>
+       
       </ion-list>
       <!-- logged in menu -->
       <ion-list ng-show="state.loggedIn == true"> 
         <ion-item menu-close href="#/app/user-home">
-          Home
+        <i class="fa fa-home"></i> Home
         </ion-item>
         <ion-item menu-close ng-click="logout()">
-          Logout
+           <i class="fa fa-unlock"></i> Logout
         </ion-item>
         <ion-item menu-close href="#/app/search">
-          Browse
+          <i class="fa fa-search-plus"></i> Browse
         </ion-item>
         <ion-item menu-close href="#/app/create-proposal">
-          Create a Proposal
+           <i class="fa fa-plus-circle"></i> Create a Proposal
         </ion-item>
         <ion-item menu-close href="#/app/profile">
-          My Profile
+           <i class="fa fa-user-plus"></i> My Profile
+           <span class="badge badge-assertive">4</span>
           </ion-item>
+          <ion-item menu-close href="#/app/admin" data-ng-if="((state.loggedIn == true) && (state.admin == true))">
+           <i class="fa fa-gears"></i> Admin Tools
+          </ion-item>
+      </ion-list>
+      <ion-list>
+         <ion-item menu-close href="#/app/about">
+           <i class="fa fa-info-circle"></i> About MSH
+        </ion-item>
+        <ion-item>
+          Language: 
+          <select>
+            <option selected>English</option>
+            <option>Spanish</option>
+            <option>French</option>
+            <option>German</option>
+            <option>Italian</option>
+          </select>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>

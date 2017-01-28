@@ -25,52 +25,135 @@ angular.module('starter.services', ['ngStorage'])
 })
 
 .factory('Vendors', function() {
-  // Some fake testing data
+
   var vendors = [
     {
     id: 0,
-    type:'steel',
     company: 'Broadway Steel',
     contact: 'Dave Smith',
-    status: 'unavailable',
-    materialType: 'steel',
+    address: '1234 Queen Street',
+    city: 'Toronto',
+    state: 'Ontario',
+    zip: 'M5V 2A5',
+    country: 'Canada',
+    phone: '555-123-1234',
+    email: 'info@steel.com',
+    url: 'http://www.steel.com',
+    international: true,
+    materialType: 'stainless-steel',
     processType: 'plate',
-    summary: 'lorem ipsum sed ante phasellus in massa ',
+    specifications: 'ASTM A588',
     face: 'img/logo.jpg',
-    include: true
+    checked: false
   }, {
     id: 1,
-    type:'alunimum',
     company: 'Metal Suppliers of America',
     contact: 'Charles Xavier',
-    status: 'available',
-    materialType: 'steel aluminium iron',
-    processType: 'plate',
-    summary: 'lorem ipsum sed ante phasellus in massa ',
+    address: '123 Ellicott Street',
+    city: 'Buffalo',
+    state: 'New York',
+    zip: '14203',
+    country: 'USA',
+    phone: '555-123-1234',
+    email: 'info@aluminum.com',
+    url: 'http://www.metalsupplyusa.com',
+    international: true,
+    materialType: 'channel',
+    processType: 'aluminum',
+    specifications: 'A-572',
     face: 'img/logo.jpg',
-    include: true
+    checked: false
   }, {
     id: 2,
     type:'iron',
     company: 'Stark Industries',
     contact: 'Anthony Stark',
-    status: 'available',
-    materialType: 'steel copper',
-    processType: 'plate',
-    summary: 'lorem ipsum sed ante phasellus in massa ',
-    face: 'img/logo.jpg',
-    include: true
+    address: '123 Broadway',
+    city: 'New York City',
+    state: 'New York',
+    zip: '10029',
+    country: 'USA',
+    phone: '555-123-1234',
+    email: 'info@starkindustires.com',
+    url: 'http://www.starkindustires.com',
+    international: true,
+    materialType: 'beam',
+    processType: 'stainless-steel',
+    specifications: 'A-36',
+    face: 'img/logo-stark.jpg',
+    checked: false
   }, {
     id: 3,
     type:'copper',
     company: 'Copper Inc.',
-    contact: 'Patricia Fendler',
-    status: 'unavailable',
-    materialType: 'copper',
-    processType: 'plate',
-    summary: 'lorem ipsum sed ante phasellus in massa ',
+    address: '222 Fifth Ave',
+    city: 'New York City',
+    state: 'New York',
+    zip: '10022',
+    country: 'USA',
+    phone: '555-123-1234',
+    email: 'info@copperinc.com',
+    url: 'http://www.copperinc.com',
+    international: true,
+    materialType: 'pipe',
+    processType: 'copper-clad',
+    specifications: '6061-T6',
     face: 'img/logo.jpg',
-    include: true
+    checked: false
+  }, {
+    id: 4,
+    company: 'First American Steel',
+    contact: 'John Goodman',
+    address: '12 Delaware Ave',
+    city: 'Buffalo',
+    state: 'New York',
+    zip: '14216',
+    country: 'USA',
+    phone: '555-123-1234',
+    email: 'info@fasteel.com',
+    url: 'http://www.fasteel.com',
+    international: true,
+    materialType: 'stainless-steel',
+    processType: 'nickle-inconel',
+    specifications: 'ASTM A588',
+    face: 'img/logo.jpg',
+    checked: false
+  }, {
+    id: 5,
+    company: 'Metalheads',
+    contact: 'John Five',
+    address: '1234 Hertel Ave',
+    city: 'Buffalo',
+    state: 'New York',
+    zip: '14216',
+    country: 'USA',
+    phone: '555-123-1234',
+    email: 'info@metal.com',
+    url: 'http://www.metalheads.com',
+    international: true,
+    materialType: 'angle',
+    processType: 'hast-alloy',
+    specifications: 'ASTM A588',
+    face: 'img/logo.jpg',
+    checked: false
+  }, {
+    id: 6,
+    company: 'Fiberglass King',
+    contact: 'Harold Johnson',
+    address: '125 Broadyway',
+    city: 'Buffalo',
+    state: 'New York',
+    zip: '14010',
+    country: 'USA',
+    phone: '555-123-1234',
+    email: 'info@mfibr.com',
+    url: 'http://www.fiberglassking.com',
+    international: true,
+    materialType: 'plate',
+    processType: 'fiberglass',
+    specifications: 'ASTM A588',
+    face: 'img/logo.jpg',
+    checked: false
   }];
 
   return {
@@ -190,7 +273,6 @@ angular.module('starter.services', ['ngStorage'])
       proposals.splice(proposals.indexOf(proposal), 1);
     },
     add: function(proposal) {
-      console.log(proposal);
       proposals.push({
         id: proposal.id,
         title: proposal.title,
@@ -211,6 +293,11 @@ angular.module('starter.services', ['ngStorage'])
         }
       }
       return null;
+    },
+     update: function(proposal) {
+       proposals.push({
+        vendors: proposal.vendors
+      })
     },
     post: function () {
       $localStorage = proposals;
@@ -250,7 +337,7 @@ angular.module('starter.services', ['ngStorage'])
         unitPrice: $scope.proposal.item.unitPrice,
         note: $scope.proposal.items.item.note
       })
-      console.log("item added" +items)
+      console.log("item added" + items)
     },
     get: function(itemlId) {
       for (var i = 0; i < items.length; i++) {

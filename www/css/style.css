@@ -5,12 +5,31 @@ header {
     padding: 20px;
 }
 
+.branding {
+    font-size: 24px;
+    margin-left: 5px;
+    color: #ffffff;
+}
+
+.logo {
+    font-size: 30px;
+    vertical-align: sub;
+}
+
+.item h3 {
+    font-size: 24px;
+}
+
 .left {
     float: left;
 }
 
 .right {
     float: right;
+}
+
+.center {
+    text-align: center;
 }
 
 fieldset {
@@ -43,6 +62,10 @@ legend {
     border-radius: 100%;
 }
 
+.profile-logo {
+    max-height: 200px;
+    border-radius: 100%;
+}
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
     border: 1px solid #999;
@@ -53,4 +76,25 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 
 input[type="number"] {
    max-width: 100px;
+}
+
+.item-input-wrapper input {
+    border: none;
+}
+
+.site-header {
+    background-color: #444;
+    color: #fff;
+    position: inherit;
+    padding: 10px 5px;
+    height: 68px;
+    background-size: 0;
+}
+
+.site-header .row {
+    padding: 0;
+}
+
+.has-footer {
+    bottom: 90px;
 }

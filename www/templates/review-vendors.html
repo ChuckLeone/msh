@@ -2,40 +2,58 @@
   <ion-content>
     <div class="row">
       <div class="col col-100">    
-        <h1>Review Vendors</h1>
+        <h1>Review Suppliers</h1>
+      </div>
+    </div>
+    <div class="row responsive-sm">
+        <!-- side panel -->
+        <div class="col col-20">
+            <p><strong>Title:</strong> {{proposal.title}}</p>
+            <p><strong>PO Number:</strong> {{proposal.poNumber}}</p>
+            <p><strong>Items on proposal:</strong> <span>{{ proposal.items.length }}</span></p>
+            <p>{{vendors.checked}}</p>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3>Details</h3>
-            <p>Title: {{proposal.title}}</p>
-            <p>PO Number: {{proposal.poNumber}}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col"><h3>Matching Vendors</h3></div>
-    </div>
-    <form>
-    <div class="row" ng-controller="ProposalVendorsCtrl">
+        <!-- /side panel -->
+
+        <div class="col col-80">
+        <h2>Matching Suppliers</h2>
+         <strong>Matched by:</strong> 
+         <p><span ng-repeat="item in proposal.items"> 
+                {{item.materialType + ', &nbsp'}} {{item.process}}, &nbsp</span>
+                </p>
+        <!-- begin proposal-->
+        <form>
+        <div class="row">
                 <div class="col">
-                   <ion-item ng-repeat="vendor in vendors | filter: { materialType: 'steel' }">
-                       <p>Vendor: <span class="item-note">{{vendor.company}}</span></p>
-                       <p>ID: <span class="item-note">{{vendor.id}}</span>
-                       <p>Contact Name: <span class="item-note">{{vendor.contact}}</span>
-                       <p>Materials Supplied: <span class="item-note">{{vendor.materialType}}</span>
-                       <p>Process Supplied: <span class="item-note">{{vendor.processType}}</span>
+                   <ion-item ng-repeat="vendor in vendors | filter:{materialType:filteredMaterials}:containsComparator">
+                       <!-- -->
+                       <div class="item item-avatar">
+                            <img ng-src={{vendor.face}} />
+                            <h2>{{vendor.company}}</h2>
+                            <p>Supplier ID: {{vendor.id}}</p>
+                            <p><strong>{{vendor.contact}}</strong></p>
+                            <p>{{vendor.city}}, {{vendor.state}} {{vendor.country}}</p>
+                        </div>
+                       <!-- -->
+                      
+                       <span>&nbsp;</span>
+                       <h4>Material Capabilities</h4>
+                       <p><strong>Type:</strong> <span class="right">{{vendor.materialType}}</span></p>
+                       <p><strong>Process:</strong> <span class="right">{{vendor.processType}}</span></p>
+                       <p><strong>Specifications</strong> <span class="right">{{vendor.specifications}}</span></p>
+                       <hr />
                        <p>
-                           <input type="checkbox" ng-model="include" ng-checked="vendor.include" />
-                           <label>Include on proposal</label>
+                           <ion-checkbox type="checkbox" ng-model="vendor.vendorChecked" ng-click="vendorChecked(vendor)" />
+                           <label>Include this supplier on proposal</label>
                        
                         </p>
                     </ion-item>
                 </div>
-    </div>
-    <div class="row">
-        <div class="col"><h3>Add a Vendor</h3></div>
-    </div>
-    <div class="row">
+        </div>
+        <div class="row">
+            <div class="col"><h3>Add a Supplier</h3></div>
+        </div>
+        <div class="row">
                 <div class="col">
                    <ion-item>     
                        <label for="newVendor-company" class="item item-input">
@@ -72,8 +90,8 @@
         </div>
     </div>
     </form>
+        <!-- /end proposal -->
         </div>
-      </div>
     </div>
   </ion-content>
 </ion-view>
