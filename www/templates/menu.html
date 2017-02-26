@@ -4,7 +4,7 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
 
-      <ion-nav-buttons side="left">
+      <ion-nav-buttons side="left" class="nav">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
         
@@ -20,51 +20,50 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable"></ion-header-bar>
-    <ion-content>
+    <ion-header-bar class="left-nav"></ion-header-bar>
+    <ion-content class="left-nav">
       <!-- logged out menu -->
-      <ion-list class="list" ng-show="!state.loggedIn == true"> 
-        <ion-item menu-close href="#/app/home">
-          <i class="fa fa-home"></i> Home
+      <ion-list ng-class="left-nav" ng-show="!state.loggedIn == true"> 
+        <ion-item class="left-nav-item" menu-close>
+          <a href="#/"><i class="fa fa-home"></i> Home</a>
         </ion-item>
-        <ion-item menu-close ng-click="login()" ng-show="!state.loggedIn == true">
+        <ion-item class="left-nav-item" menu-close ng-click="login()" ng-show="!state.loggedIn == true">
           <i class="fa fa-user-circle"></i> Login
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          <i class="fa fa-search-plus"></i> Browse
+        <ion-item class="left-nav-item" menu-close>
+          <a href="#/app/search"><i class="fa fa-search-plus"></i> Browse</a>
         </ion-item>
-        <ion-item menu-close href="#/app/create-profile">
-          <i class="fa fa-user-plus"></i> Create a Profile
+        <ion-item class="left-nav-item" menu-close>
+          <a href="#/app/create-profile"><i class="fa fa-user-plus"></i> Create a Profile</a>
         </ion-item>
-       
       </ion-list>
       <!-- logged in menu -->
       <ion-list ng-show="state.loggedIn == true"> 
-        <ion-item menu-close href="#/app/user-home">
-        <i class="fa fa-home"></i> Home
+        <ion-item class="left-nav-item" menu-close>
+        <a href="#/app/user-home"><i class="fa fa-home"></i> Home</a>
         </ion-item>
-        <ion-item menu-close ng-click="logout()">
+        <ion-item class="left-nav-item" menu-close ng-click="logout()">
            <i class="fa fa-unlock"></i> Logout
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          <i class="fa fa-search-plus"></i> Browse
+        <ion-item class="left-nav-item" menu-close>
+          <a href="#/app/search"><i class="fa fa-search-plus"></i> Browse</a>
         </ion-item>
-        <ion-item menu-close href="#/app/create-proposal">
-           <i class="fa fa-plus-circle"></i> Create a Proposal
+        <ion-item class="left-nav-item" menu-close>
+           <a href="#/app/create-proposal"><i class="fa fa-plus-circle"></i> Create a Proposal</a>
         </ion-item>
-        <ion-item menu-close href="#/app/profile">
-           <i class="fa fa-user-plus"></i> My Profile
-           <span class="badge badge-assertive">4</span>
+        <ion-item class="left-nav-item" menu-close>
+           <a href="#/app/profile"><i class="fa fa-user-plus"></i> My Profile
+           <span class="badge badge-assertive">4</span></a>
           </ion-item>
-          <ion-item menu-close href="#/app/admin" data-ng-if="((state.loggedIn == true) && (state.admin == true))">
-           <i class="fa fa-gears"></i> Admin Tools
+          <ion-item class="left-nav-item" data-ng-if="((state.loggedIn == true) && (state.admin == true))">
+           <a menu-close href="#/app/admin"><i class="fa fa-gears"></i> Admin Tools</a>
           </ion-item>
       </ion-list>
       <ion-list>
-         <ion-item menu-close href="#/app/about">
-           <i class="fa fa-info-circle"></i> About MSH
+         <ion-item class="left-nav-item" menu-close>
+           <a href="#/app/about"><i class="fa fa-info-circle"></i> About MSH</a>
         </ion-item>
-        <ion-item>
+        <ion-item class="left-nav-item" >
           Language: 
           <select>
             <option selected>English</option>

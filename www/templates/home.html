@@ -3,7 +3,7 @@
     <!-- logged out view -->
     <div ng-show="state.loggedIn == !true">
       <div class="row responsive-sm">
-        <div class="col text-center">
+        <div class="col text-center bottom-pull">
           <h1>Welcome to Material Supply Hub.</h1>
             <p>The connection hub for material manufacturers and suppliers</p>
         </div>
@@ -14,17 +14,22 @@
         <ion-slide-box>
             <ion-slide>
               <div>   
-                <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
+                <p><img src="img/process.png" ng-click="nextSlide()"></p>
               </div>
             </ion-slide>
             <ion-slide>
               <div class="box blue">   
-                <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
+                <p><img src="img/process2.png" ng-click="nextSlide()"></p>
               </div>
             </ion-slide>
             <ion-slide>
               <div class="box blue">   
-                <p><img src="img/placeholder.png" ng-click="nextSlide()"></p>
+                <p><img src="img/process3.png" ng-click="nextSlide()"></p>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div class="box blue">   
+                <p><img src="img/process4.png" ng-click="nextSlide()"></p>
               </div>
             </ion-slide>
           </ion-slide-box>
@@ -38,10 +43,10 @@
                 Login
               </button>
               <h3>Not a member?</h3>
-                <ion-item menu-close href="#/app/create-profile">
+                <ion-item class="border-none" menu-close href="#/app/create-profile">
                   Create a profile <i class="ion-chevron-right"></i>
                 </ion-item>
-                <ion-item menu-close href="#/app/about">
+                <ion-item class="border-none" menu-close href="#/app/about">
                   Learn more about MSH <i class="ion-chevron-right"></i>
                 </ion-item>
           </div>
@@ -55,6 +60,9 @@
       <div class="col col-25">
         <!-- my profile -->
         <div ng-controller="ProfileCtrl" class="list card">
+          <ion-item>
+                <span class="component-title">My Details</span>
+              </ion-item>
                 <div class="item item-avatar">
                    <img ng-src={{profile.logo}} class="profile-logo" />
                   <h2>{{profile.company}}</h2>
@@ -76,15 +84,12 @@
         </div>
         <!-- my capabilities -->
           <div class="list card">
-            <div class="item item-divider">My Capabilities</div>
-            <div>
-                  <ion-list ng-controller="ProfileCtrl">
-                    <ion-item>
-                      <div class="item-body">
-                        <span class="padding-horizontal" ng-repeat="capability in capabilities">
-                          <button class="button icon-left ion-close button-stable">{{capability.title}}</button>
-                        </span>  
-                      </div>
+              <ion-item>
+                <span class="component-title">My Capabilities</span>
+              </ion-item>
+                  <div ng-controller="ProfileCtrl">
+                    <ion-item class="border-none" ng-repeat="capability in capabilities">
+                      <button class="button text-small icon-left ion-close button-stable">{{capability.title}}</button>
                     </ion-item>
                     <ion-item>
                       <span>Add Capabilities</span>
@@ -95,13 +100,7 @@
                         </label>
                       </span>
                       </ion-item>
-                    <!--<button class="button button-block button-stable" 
-                      ng-click="addCapability()">
-                     <i class="icon ion-ios-plus"></i>
-                     Add Capability</button>-->
-                     
-                  </ion-list>
-            </div>
+              </div>
           </div> 
           <!-- /my capabilities -->
       </div>
@@ -110,39 +109,40 @@
       <div class="col col-75">
         <!-- actions -->
         <div ng-controller="ProfileCtrl" class="list card">
+          <ion-item class="item"><span class="component-title">Dashboard</span></ion-item>
          <div class="item-body">
-                     <span class="padding-horizontal" ng-if="profile.type == 'manufacturer'">
+                     <span class="item item-horizontal padding-horizontal" ng-if="profile.type == 'manufacturer'">
                       <button class="button button-positive">{{profile.drafts}}</button>
                       <a class="button button-clear button-dark" href="#">Drafts</a>
                     </span>
-                    <span class="padding-horizontal" ng-if="profile.type == 'manufacturer'">
+                    <span class="item item-horizontal padding-horizontal" ng-if="profile.type == 'manufacturer'">
                       <button class="button button-calm" ng-controller="ProposalsCtrl" >{{proposals.length}}</button>
                       <a class="button button-clear button-dark" href="#">Submitted</a>
                     </span>
-                     <span class="padding-horizontal" ng-if="profile.type == 'supplier'">
+                     <span class="item item-horizontal padding-horizontal" ng-if="profile.type == 'supplier'">
                       <button class="button button-calm" ng-controller="ProposalsCtrl" >{{proposals.length}}</button>
                       <a class="button button-clear button-dark" href="#">Received</a>
                     </span>
-                    <span class="padding-horizontal">
+                    <span class="item item-horizontal padding-horizontal">
                       <button class="button button-balanced">{{profile.accepted}}</button>
                       <a class="button button-clear button-dark" href="#">Accepted</a>
                     </span>
-                     <span class="padding-horizontal" ng-if="profile.type == 'supplier'">
+                     <span class="item item-horizontal padding-horizontal" ng-if="profile.type == 'supplier'">
                       <button class="button button-assertive">{{profile.accepted}}</button>
                       <a class="button button-clear button-dark" href="#">Denied</a>
                     </span>
-                    <span class="padding-horizontal">
+                    <span class="item item-horizontal padding-horizontal">
                       <button class="button button-energized">{{profile.quoting}}</button>
                       <a class="button button-clear button-dark" href="#">Quoting</a>
                     </span>
-                    <span class="padding-horizontal">
+                    <span class="item item-horizontal padding-horizontal">
                      <button class="button button-royal">{{profile.awarded}}</button>
                       <a class="button button-clear button-dark" href="#">Awarded</a>
                     </span>
                     <!-- communications -->
-                      <span class="padding-horizontal">
-                      <span class="badge badge-assertive">3</span>
-                      <a class="button button-clear button-dark" href="#">Unread messages</a>
+                      <span class="item item-horizontal padding-horizontal">
+                      <button class="button button-assertive">3</button>
+                      <a class="button button-clear button-dark" href="#">Messages</a>
                     </span>
                       <!-- /communications -->
           </div>
@@ -150,13 +150,18 @@
         <!-- /actions -->
         <!--  my proposal -->
           <div class="list card">
-            <div class="item item-divider">My Proposals</div>
-            <div>
-                  <ion-list ng-controller="ProposalsCtrl">
-                    <a class="item item-icon-left calm" href="#/app/create-proposal">
-                      <i class="icon ion-ios-plus"></i>
+            <ion-item class="item">
+              <span class="right">
+                <a class="button button-small button-positive" href="#/app/create-proposal">
+                      <i class="icon ion-ios-plus-empty"></i>
                         New Proposal
                    </a>
+              </span>
+              <span class="component-title">My Proposals</span>
+            </ion-item>
+            <div class="item-body">
+                  <ion-list ng-controller="ProposalsCtrl">
+                    <span ng-if="proposals.length <= 0">You have no proposals. Please add a proposal with the button to the right.</span>
                       <ion-item class="item-remove-animate item-avatar item-icon-right" 
                           ng-repeat="proposal in proposals" 
                           type="item-text-wrap" 
@@ -173,8 +178,10 @@
           <!-- /my proposals -->   
            <!--  activity feed -->
           <div class="list card" ng-controller="ProfileCtrl">
-            <div class="item item-divider">Activity Feed</div>
-            <div>
+               <ion-item class="item">
+                 <span class="component-title">Activity Feed</span></ion-item>
+              </ion-item>
+          <div class="item-body">
                   <ion-list>
                       <ion-item class="item-remove-animate" 
                           ng-repeat="item in feed" 
@@ -186,19 +193,22 @@
             </div>
           </div>     
           <!-- /activity feed --> 
-           <!--  activity feed -->
-          <div class="list card">
-            <div class="item item-divider">My Widgets</div>
+           <!--  activity feed -->         
+            <div class="list card" ng-controller="ProfileCtrl">
+               <ion-item class="item">
+                 <span class="component-title">My Widgets</span></ion-item>
+              </ion-item>
+
             <div class="item-body">
-                 <span class="padding-horizontal">
+                 <span class="item item-horizontal padding-horizontal">
                       <button class="button button-positive"><i class="icon ion-stats-bars"></i></button>
                       <a class="button button-clear button-dark" href="#">Average Steel Price</a>
                   </span>
-                  <span class="padding-horizontal">
+                  <span class="item item-horizontal padding-horizontal">
                       <button class="button button-positive"><i class="icon ion-pie-graph"></i></button>
                       <a class="button button-clear button-dark" href="#">Sales by Region</a>
                   </span>
-                  <span class="padding-horizontal">
+                  <span class="item item-horizontal padding-horizontal">
                       <button class="button button-positive"><i class="icon ion-arrow-graph-up-right"></i></button>
                       <a class="button button-clear button-dark" href="#">Progress</a>
                   </span>         

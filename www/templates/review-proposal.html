@@ -1,91 +1,97 @@
 <ion-view>
-  <ion-content>
-    <div class="row  responsive-sm">
-      <div class="col">    
-        <h1>Review Proposal</h1>
-        </div>
-    </div>
-    <div class="row responsive-sm">
-        <!-- side panel -->
-        <div class="col col-20">
-            <h3>Details</h3>
-            <p><strong>Requester:</strong> 
-              <span>{{proposal.contact}}</span>
-            </p>
-            <p><strong>Title:</strong> {{proposal.title}}</p>
-            <p><strong>Description:</strong> {{proposal.description}}</p>
-            <p><strong>Due Date:</strong> {{proposal.dueDate | date}}</p>
-            <p><strong>PO Number:</strong> {{proposal.poNumber | number}}</p>
-        </div>
-        <!-- /side panel -->
-        <!-- begin proposal -->
-        <div class="col col-80">
-             <div class="row">
-                <div class="col"><h3>Items</h3></div>
-             </div>
-            <div class="row">
-                <div class="col">
-                   <ion-item ng-repeat="item in proposal.items">
-                       <h4 class="center">Item</h4>
-                       <p><strong>Material Type:</strong> <span class="right"> {{item.materialType}}</span></p>
-                       <p><strong>Process:</strong> <span class="right">{{item.process}}</span></p>
-                       <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
-                       <hr />
-                       <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
-                       <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
-                       <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
-                       <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
-                       <hr />
-                       <p><strong>Quantity:</strong> <span class="right">{{item.quantity | number}}</span></p>
-                       <p><strong>Unit Price:</strong> <span class="right">{{item.unitPrice | currency}}</span></p>
-                       <hr>
-                       <p><strong>Notes:</strong></p>
-                       <p>{{item.note}}</span></p>  
-                    </ion-item>
-                </div>
+    <ion-content>
+        <div class="row  responsive-sm">
+            <div class="col">
+                <h1>Review Proposal</h1>
             </div>
-        <!-- -->
-    <div class="row">
-        <div class="col"><h3>Suppliers</h3></div>
-    </div>
-    <span ng-if="(proposal.vendors).length > 0">
+        </div>
+        <div class="row responsive-sm">
+            <!-- side panel -->
+            <div class="col col-20">
+                <h3>Details</h3>
+                <p><strong>Requester:</strong>
+                    <span>{{proposal.contact}}</span>
+                </p>
+                <p><strong>ID:</strong> {{proposal.id}}</p>
+                <p><strong>Title:</strong> {{proposal.title}}</p>
+                <p><strong>Description:</strong> {{proposal.description}}</p>
+                <p><strong>Due Date:</strong> {{proposal.dueDate | date}}</p>
+                <p><strong>PO Number:</strong> {{proposal.poNumber | number}}</p>
+            </div>
+            <!-- /side panel -->
+            <!-- begin proposal -->
+            <div class="col col-80">
+                <div class="row">
+                    <div class="col">
+                        <h3>Items</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <ion-item ng-repeat="item in proposal.items">
+                            <h4 class="center">Item</h4>
+                            <p><strong>Material Type:</strong> <span class="right"> {{item.materialType}}</span></p>
+                            <p><strong>Process:</strong> <span class="right">{{item.process}}</span></p>
+                            <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
+                            <hr />
+                            <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
+                            <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
+                            <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
+                            <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
+                            <hr />
+                            <p><strong>Quantity:</strong> <span class="right">{{item.quantity | number}}</span></p>
+                            <p><strong>Unit Price:</strong> <span class="right">{{item.unitPrice | currency}}</span></p>
+                            <hr>
+                            <p><strong>Notes:</strong></p>
+                            <p>{{item.note}}</span>
+                            </p>
+                        </ion-item>
+                    </div>
+                </div>
+                <!-- -->
+                <div class="row">
+                    <div class="col">
+                        <h3>Suppliers</h3>
+                    </div>
+                </div>
+                <span ng-if="(proposal.vendors).length > 0">
         <div class="row">
             <!--<div class="row">-->
                 <div class="col">
                    <ion-item ng-repeat="vendor in proposal.vendors">
                        <p>Supplier: <span class="right">{{vendor.company}}</span></p>
-                       <p>Contact Name: <span class="right">{{vendor.contact}}</span>
-                       <p>Materials Supplied: <span class="right">{{vendor.materialType}}</span>
-                       <form>
-                           <input type="checkbox" checked />
-                           <label>Include on proposal</label>
+                <p>Contact Name: <span class="right">{{vendor.contact}}</span>
+                    <p>Materials Supplied: <span class="right">{{vendor.materialType}}</span>
+                        <form>
+                            <input type="checkbox" checked />
+                            <label>Include on proposal</label>
                         </form>
-                        </p>
+                    </p>
                     </ion-item>
-                </div>
+            </div>
         </div>
-    </span>
-    <!-- -->
-    <span ng-if="(proposal.vendors).length === 0">
+        </span>
+        <!-- -->
+        <span ng-if="(proposal.vendors).length === 0">
             <div class="row">
                 <div class="col">
                     <p><i class="icon ion-alert-circled energized"></i>There are no suppliers saved to this proposal.</p>
                     <p> Click or tap the add vendors button to select suppliers to include on this proposal.</p>
                     <section>
-                        <a  href="#/app/proposals/{{proposal.id}}/vendors" class="button button-block button-positive" ng-click="selectVendors()">Add Suppliers</a>
+                        <a href="#/app/proposals/{{proposal.id}}/vendors" class="button button-block button-positive" ng-click="selectVendors()">Add Suppliers</a>
                     </section>
                 </div>
             </div>
     </span>
-    <div class="row">
-        <div class="col">
-            <section>
-                <button class="button button-block button-outline button-assertive" ng-click="remove()">Cancel Proposal</button>
-            </section>
+        <div class="row">
+            <div class="col">
+                <section>
+                    <button class="button button-block button-outline button-assertive" ng-click="remove()">Cancel Proposal</button>
+                </section>
+            </div>
         </div>
-    </div>
         </div>
         <!-- /end proposal -->
-    </div>    
-  </ion-content>
+        </div>
+    </ion-content>
 </ion-view>

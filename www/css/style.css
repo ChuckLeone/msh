@@ -1,14 +1,28 @@
 /* Empty. Add your own CSS if you like */
+
 header {
-    background-color: #444;
     color: #fff;
     padding: 20px;
 }
 
-.branding {
+.footer {
+    font-size: 14px;
+    color: #66717E;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.brand {
+    background-color: transparent;
     font-size: 24px;
-    margin-left: 5px;
     color: #ffffff;
+    height: 50px;
+}
+
+hr {
+    border: 1px solid #e2e2e2;
 }
 
 .logo {
@@ -34,7 +48,6 @@ header {
 
 fieldset {
     border: 0;
-
 }
 
 legend {
@@ -67,15 +80,32 @@ legend {
     border-radius: 100%;
 }
 
-textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
     border: 1px solid #999;
     border-radius: 2px;
     padding: 5px;
-    max-width: 380px;
 }
 
 input[type="number"] {
-   max-width: 100px;
+    max-width: 100px;
+}
+
+.item-input {
+    padding: 10px;
 }
 
 .item-input-wrapper input {
@@ -83,18 +113,83 @@ input[type="number"] {
 }
 
 .site-header {
-    background-color: #444;
     color: #fff;
     position: inherit;
     padding: 10px 5px;
-    height: 68px;
+    height: 80px;
     background-size: 0;
+}
+
+.site-header .right {
+    margin-top: 5px;
 }
 
 .site-header .row {
     padding: 0;
 }
 
+.left-nav {
+    background: #e5e5e5;
+}
+
+.left-nav-item {
+    background: #f7f7f7;
+    color: #333;
+}
+
+.left-nav a {
+    color: #333;
+    text-decoration: none;
+}
+
 .has-footer {
     bottom: 90px;
+}
+
+.card {
+    box-shadow: none;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    padding-top: 10px;
+}
+
+.component-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.text-small {
+    font-size: 0.8em;
+}
+
+.border-none {
+    border: none;
+}
+
+.item-horizontal {
+    display: inline-block;
+    border: none;
+    padding: 10px;
+}
+
+
+/* mods and break points */
+
+@media (max-width: 567px) {
+    h1 {
+        font-size: 20px;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    h3 {
+        font-size: 16px;
+    }
+    .item-horizontal {
+        display: block;
+    }
 }

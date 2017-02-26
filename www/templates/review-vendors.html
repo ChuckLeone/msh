@@ -1,97 +1,107 @@
 <ion-view>
-  <ion-content>
-    <div class="row">
-      <div class="col col-100">    
-        <h1>Review Suppliers</h1>
-      </div>
-    </div>
-    <div class="row responsive-sm">
-        <!-- side panel -->
-        <div class="col col-20">
-            <p><strong>Title:</strong> {{proposal.title}}</p>
-            <p><strong>PO Number:</strong> {{proposal.poNumber}}</p>
-            <p><strong>Items on proposal:</strong> <span>{{ proposal.items.length }}</span></p>
-            <p>{{vendors.checked}}</p>
+    <ion-content>
+        <div class="row">
+            <div class="col col-100">
+                <h1>Review Suppliers</h1>
+            </div>
         </div>
-        <!-- /side panel -->
+        <div class="row responsive-sm">
+            <!-- side panel -->
+            <div class="col col-20">
+                <h2>Step 2</h2>
+                <br/>
+                <p><strong>Title:</strong> {{proposal.title}}</p>
+                <p><strong>PO Number:</strong> {{proposal.poNumber}}</p>
+                <p><strong>Items on proposal:</strong> <span>{{ proposal.items.length }}</span></p>
+                <p><strong>Vendors on proposal:</strong> {{vendors.checked.length}}</p>
+            </div>
+            <!-- /side panel -->
 
-        <div class="col col-80">
-        <h2>Matching Suppliers</h2>
-         <strong>Matched by:</strong> 
-         <p><span ng-repeat="item in proposal.items"> 
+            <div class="col col-80">
+                <h2>Matching Suppliers</h2>
+                <strong>Matched by:</strong>
+                <p><span ng-repeat="item in proposal.items"> 
                 {{item.materialType + ', &nbsp'}} {{item.process}}, &nbsp</span>
                 </p>
-        <!-- begin proposal-->
-        <form>
-        <div class="row">
-                <div class="col">
-                   <ion-item ng-repeat="vendor in vendors | filter:{materialType:filteredMaterials}:containsComparator">
-                       <!-- -->
-                       <div class="item item-avatar">
-                            <img ng-src={{vendor.face}} />
-                            <h2>{{vendor.company}}</h2>
-                            <p>Supplier ID: {{vendor.id}}</p>
-                            <p><strong>{{vendor.contact}}</strong></p>
-                            <p>{{vendor.city}}, {{vendor.state}} {{vendor.country}}</p>
+                <!-- begin proposal-->
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <ion-item class="card" ng-repeat="vendor in vendors | filter : { materialType : filteredMaterials } :containsComparator">
+                                <div class="card-title">
+                                    <strong>{{vendor.company}}</strong>
+                                </div>
+                                <div class="right">
+                                    <ion-checkbox type="checkbox" ng-model="vendor.vendorChecked" ng-click="vendorChecked(vendor)" />
+                                    <label>Include this supplier on proposal</label>
+
+                                </div>
+                                <div class="item item-avatar border-none">
+                                    <img ng-src={{vendor.face}} />
+
+                                    <p>Supplier ID: {{vendor.id}}</p>
+                                    <p><strong>{{vendor.contact}}</strong></p>
+                                    <p>{{vendor.city}}, {{vendor.state}} {{vendor.country}}</p>
+                                </div>
+
+                                <!-- -->
+                                <hr />
+                                <span>&nbsp;</span>
+                                <h4>Material Capabilities</h4>
+                                <p><strong>Type:</strong> <span class="right">{{vendor.materialType}}</span></p>
+                                <p><strong>Process:</strong> <span class="right">{{vendor.processType}}</span></p>
+                                <p><strong>Specifications</strong> <span class="right">{{vendor.specifications}}</span></p>
+                                <br />
+                            </ion-item>
                         </div>
-                       <!-- -->
-                      
-                       <span>&nbsp;</span>
-                       <h4>Material Capabilities</h4>
-                       <p><strong>Type:</strong> <span class="right">{{vendor.materialType}}</span></p>
-                       <p><strong>Process:</strong> <span class="right">{{vendor.processType}}</span></p>
-                       <p><strong>Specifications</strong> <span class="right">{{vendor.specifications}}</span></p>
-                       <hr />
-                       <p>
-                           <ion-checkbox type="checkbox" ng-model="vendor.vendorChecked" ng-click="vendorChecked(vendor)" />
-                           <label>Include this supplier on proposal</label>
-                       
-                        </p>
-                    </ion-item>
-                </div>
-        </div>
-        <div class="row">
-            <div class="col"><h3>Add a Supplier</h3></div>
-        </div>
-        <div class="row">
-                <div class="col">
-                   <ion-item>     
-                       <label for="newVendor-company" class="item item-input">
+                        <br />
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <h3>Add a Supplier</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ion-item>
+                                <label for="newVendor-company" class="item item-input item-stacked-label border-none">
                             <span class="input-label">Company</span>
                             <input type="text" ng-model="newVendor.company" name="newVendor-company" id="newVendor-company" size="50">
                       </label>
-                      <label for="newVendor-contact" class="item item-input">
+                                <label for="newVendor-contact" class="item item-input item-stacked-label border-none">
                             <span class="input-label">Contact</span>
                             <input type="text" ng-model="newVendor.contact" name="newVendor-contact" id="newVendor-contact" size="50">
                       </label>
-                      <label for="newVendor-email" class="item item-input">
+                                <label for="newVendor-email" class="item item-input item-stacked-label border-none">
                             <span class="input-label">Email Address</span>
                             <input type="text" ng-model="newVendor.email" name="newVendor-email" id="newVendor-email" size="50">
                       </label>
-                       <label for="newVendor-location" class="item item-input">
+                                <label for="newVendor-location" class="item item-input item-stacked-label border-none">
                             <span class="input-label">Location</span>
                             <input type="text" ng-model="newVendor.location" name="newVendor-location" id="newVendor-location" size="50">
                       </label>
-                    </ion-item>
-                </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <section>
-                <button class="button button-block button-positive" ng-click="submitProposal()">Submit Proposal</button>
-            </section>
+                            </ion-item>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <section>
+                                <button class="button button-block button-positive" ng-click="submitProposal()">Submit Proposal</button>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <section>
+                                <button class="button button-block button-outline button-assertive" ng-click="remove()">Cancel Proposal</button>
+                            </section>
+                        </div>
+                    </div>
+                </form>
+                <!-- /end proposal -->
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <section>
-                <button class="button button-block button-outline button-assertive" ng-click="remove()">Cancel Proposal</button>
-            </section>
-        </div>
-    </div>
-    </form>
-        <!-- /end proposal -->
-        </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>
