@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-content>
+    <ion-content overflow-scroll="true">
         <div class="row">
             <div class="col">Welcome <strong>{{ userName }}</strong></div>
         </div>
@@ -12,7 +12,9 @@
             </div>
         </div>
         <div class="row" ng-show="state.loggedIn != true">
-            <div class="col col-75"><ion-item ng-click="login()">Login to see your data.</ion-item></div>
+            <div class="col col-75">
+                <ion-item ng-click="login()">Login to see your data.</ion-item>
+            </div>
         </div>
-    <ion-content>
-<ion-view>
+    </ion-content>
+</ion-view>

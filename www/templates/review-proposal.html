@@ -1,6 +1,6 @@
 <ion-view>
-    <ion-content>
-        <div class="row  responsive-sm">
+    <ion-content overflow-scroll="true">
+        <div class="row responsive-sm">
             <div class="col">
                 <h1>Review Proposal</h1>
             </div>
@@ -17,57 +17,80 @@
                 <p><strong>Description:</strong> {{proposal.description}}</p>
                 <p><strong>Due Date:</strong> {{proposal.dueDate | date}}</p>
                 <p><strong>PO Number:</strong> {{proposal.poNumber | number}}</p>
+                <p><strong>Items:</strong> {{(proposal.items).length | number}}</p>
+                <p><strong>Vendors:</strong> {{(proposal.vendors).length | number}}</p>
             </div>
             <!-- /side panel -->
             <!-- begin proposal -->
             <div class="col col-80">
                 <div class="row">
                     <div class="col">
-                        <h3>Items</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <ion-item ng-repeat="item in proposal.items">
-                            <h4 class="center">Item</h4>
-                            <p><strong>Material Type:</strong> <span class="right"> {{item.materialType}}</span></p>
+                        <h3>Materials</h3>
+                        <ion-item ng-repeat="item in proposal.items" ng-if="(item.type == 'material')" class="card">
+                            <h4 class="card-title">{{item.materialType}}</h4>
+                            <br />
+                            <p><strong>Item Type:</strong> <span class="right">{{item.type}}</span></p>
                             <p><strong>Process:</strong> <span class="right">{{item.process}}</span></p>
                             <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
-                            <hr />
                             <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
                             <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
                             <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
                             <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
                             <hr />
-                            <p><strong>Quantity:</strong> <span class="right">{{item.quantity | number}}</span></p>
-                            <p><strong>Unit Price:</strong> <span class="right">{{item.unitPrice | currency}}</span></p>
+                            <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
+
+                            <span ng-if="item.note.length > 0">
+                            <br />
                             <hr>
                             <p><strong>Notes:</strong></p>
-                            <p>{{item.note}}</span>
-                            </p>
+                            <p>{{item.note}} </p></span>
+                        </ion-item>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>Parts</h3>
+
+                        <ion-item ng-repeat="item in proposal.items" ng-if="(item.type == 'part')" class="card">
+                            <h4 class="card-title">{{item.partType}}</h4>
+                            <br />
+                            <p><strong>Item Type:</strong> <span class="right">{{item.type}}</span></p>
+                            <p><strong>Part Make:</strong> <span class="right">{{item.partMake}}</span></p>
+                            <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
+
+                            <p><strong>Quantity:</strong> <span class="right">{{item.quantity| number}}</span></p>
+                            <hr />
+                            <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
+
+                            <span ng-if="item.note.length > 0">
+                                <br />
+                                <hr>
+                                <p><strong>Notes:</strong></p>
+                                <p>{{item.note}} </p></span>
                         </ion-item>
                     </div>
                 </div>
                 <!-- -->
-                <div class="row">
-                    <div class="col">
-                        <h3>Suppliers</h3>
-                    </div>
-                </div>
                 <span ng-if="(proposal.vendors).length > 0">
-        <div class="row">
-            <!--<div class="row">-->
+            <div class="row">
                 <div class="col">
-                   <ion-item ng-repeat="vendor in proposal.vendors">
-                       <p>Supplier: <span class="right">{{vendor.company}}</span></p>
-                <p>Contact Name: <span class="right">{{vendor.contact}}</span>
-                    <p>Materials Supplied: <span class="right">{{vendor.materialType}}</span>
-                        <form>
+                    <h3>Suppliers</h3>
+                    <ion-item ng-repeat="vendor in proposal.vendors" class="card">
+                        <div class="card-title">
+                            <form class="right">
                             <input type="checkbox" checked />
                             <label>Include on proposal</label>
                         </form>
-                    </p>
-                    </ion-item>
+                         <h4 >{{vendor.company}}</h4>
+                        </div>
+                       
+                            <br />
+                            <p><strong>Contact Name:</strong> <span class="right"> {{vendor.contact}}</span></p>
+                <p><strong>Supplier Capabilities:</strong> <span class="right">{{vendor.materialType}}, {{vendor.partType}}</span></p>
+
+
+                </p>
+                </ion-item>
             </div>
         </div>
         </span>

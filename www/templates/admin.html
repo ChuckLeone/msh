@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-content overflow-scroll="false">
+    <ion-content overflow-scroll="true">
         <!-- logged out view -->
         <div ng-show="state.loggedIn == !true">
             <div class="row responsive-sm">
@@ -54,8 +54,8 @@
             </div>
         </div>
         <!-- /logged out view -->
-        <!-- logged in not admin -->
-        <div ng-show="((state.loggedIn == true) && (state.admin != true))" class="row responsive-sm">
+        <!-- logged in -->
+        <div ng-show="state.loggedIn == true" class="row responsive-sm">
             <!-- left col -->
             <div class="col col-25">
                 <!-- my profile -->
@@ -127,7 +127,7 @@
                         <span class="item item-horizontal padding-horizontal align-center" ng-if="profile.type == 'supplier'">
                             <button class="button button-calm" ng-controller="ProposalsCtrl" >{{proposals.length}}</button>
                             <br />
-                            <a class="button button-clear button-dark" href="#">New</a>
+                            <a class="button button-clear button-dark" href="#">Received</a>
                         </span>
                         <span class="item item-horizontal padding-horizontal align-center">
                             <button class="button button-balanced">{{profile.accepted}}</button>
@@ -155,14 +155,8 @@
                 <!--  my proposal -->
                 <div class="list card">
                     <ion-item class="item">
-                        <span class="right" ng-if="profile.type == 'manufacturer'">
-                        <a class="button button-small button-positive" href="#/app/create-proposal">
-                            <i class="icon ion-ios-plus-empty"></i>
-                                New Proposal
-                        </a>
-                        </span>
-                        <span class="component-title" ng-if="profile.type == 'manufacturer'">My Proposals</span>
-                        <span class="component-title" ng-if="profile.type == 'supplier'">Received Proposals</span>
+
+                        <span class="component-title">Users</span>
                     </ion-item>
                     <div class="item-body">
                         <ion-list ng-controller="ProposalsCtrl">
@@ -234,33 +228,5 @@
             <!-- /right col -->
         </div>
         <!-- /logged in view -->
-        <!-- logged in admin view -->
-        <div ng-show="((state.loggedIn == true) && (state.admin == true))" class="responsive-sm" style="padding: 10px;" ng-controller="MaterialsDatabaseCtrl">
-
-            <button class="button text-small button-stable">Add <i class="fa fa-plus-circle"></i></button>
-            <br />
-            <div>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Material Type</th>
-                        <th>Material Process</th>
-                        <th>Material Specification</th>
-                        <th>Material Description</th>
-                        <th>Material Weight</th>
-                    </tr>
-                    <tr ng-repeat="material in materials">
-                        <td>{{material.id}}</td>
-                        <td>{{material.type}}</td>
-                        <td>{{material.process}}</td>
-                        <td>{{material.specifications}}</td>
-                        <td>{{material.description}}</td>
-                        <td>{{material.weight}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- /logged in admin view -->
     </ion-content>
 </ion-view>

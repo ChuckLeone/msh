@@ -1,28 +1,29 @@
 <ion-view>
-  <ion-content>
-    <div class="row">
-      <div class="col col-80">
-        <h1>{{request.title}}</h1></div>
-      <div class="col col-20"><button class="button button-block button-positive" ng-disabled="state.loggedIn == !true">submit a proposal</button></div>
-    </div>
-     <div class="row">
-      <div class="col col-80">
-        Requested by:
-        <h3>{{request.company}}</h3>
-        <dl>
-          <dt>Contact</dt>
-          <dd><img src={{request.face}} class="request-avatar" /> {{request.contact}}</dd>
-        </dl>
-        <dl>
-          <dt>Summary:</dt>
-          <dd>{{request.summary}}</dd>
-        </dl>
-        <hr>
-        <dl>
-          <dt>Amount Needed</dt>
-          <dd>{{request.amount}}</dd>
-        </dl>
+    <ion-content overflow-scroll="true">
+        <div class="row">
+            <div class="col col-80">
+                <h1>{{request.title}}</h1>
+            </div>
+            <div class="col col-20"><button class="button button-block button-positive" ng-disabled="state.loggedIn == !true">submit a proposal</button></div>
         </div>
-    </div>
-  </ion-content>
+        <div class="row">
+            <div class="col col-80">
+                Requested by:
+                <h3>{{request.company}}</h3>
+                <dl>
+                    <dt>Contact</dt>
+                    <dd><img src={{request.face}} class="request-avatar" /> {{request.contact}}</dd>
+                </dl>
+                <dl>
+                    <dt>Summary:</dt>
+                    <dd>{{request.summary}}</dd>
+                </dl>
+                <hr>
+                <dl>
+                    <dt>Amount Needed</dt>
+                    <dd>{{request.amount}}</dd>
+                </dl>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

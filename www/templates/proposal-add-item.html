@@ -1,121 +1,241 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Add an Item</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeAddItem()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="saveItem()">
-        <div class="row responsive-sm">
-            <div class="list">
-                <label for="item-material-type" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Material Type:</span>
-                        <select name="item-material-type" id="item-material-type" ng-model="proposal.items.item.materialType">
-                            <option value="angle">Angle</option>
-                            <option value="beam">Beam</option>
-                            <option value="channel">Channel</option>
-                            <option value="flatbar">Flatbar</option>
-                            <option value="grating">Grating</option>
-                            <option value="pipe">Pipe</option>
-                            <option value="plate">Plate</option>
-                            <option value="roundbar">Round Bar</option>
-                            <option value="tee">Tee</option>
-                            <option value="tube-rectanglge">Tube Rectangle</option>
-                            <option value="tube-square">Tube Square</option>
-                        </select>
-                </label>
-                <label for="item-process" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Process:</span>
-                        <select name="item-process" id="item-process" ng-model="proposal.items.item.process">
-                            <option value="aluminum">Aluminum</option>
-                            <option value="carbon-steel">Carbon Steel</option>
-                            <option value="copper-clad">Copper Clad</option>
-                            <option value="stainless-steel">Stainless Steel</option>
-                            <option value="fiberglass">Fiberglass</option>
-                            <option value="hast-alloy">Hast Alloy</option>
-                            <option value="monel">Monel</option>
-                            <option value="nickle-inconel">Nickle Inconel</option>
-                        </select>
-                </label>
-                <label for="item-specifications" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Specifications:</span>
-                        <select name="item-specifications" id="item-specifications" ng-model="proposal.items.item.specifications">
-                            <option value="6061-T6">6061-T6</option>
-                            <option value="A-36">A-36</option>
-                            <option value="A-572"> A-572</option>
-                            <option value="ASTM A588">ASTM A588</option>
-                            <option value="316/316L - ASTM A276">316/316L - ASTM A276</option>
-                            <option value="ASTM A-240 - 304/304L">ASTM A-240 - 304/304L</option>
-                            <option value="6061-T6">6061-T6L</option>
-                            <option value="A-572 GR 50">A-572 GR 50</option>
-                            <option value="A-992">A-500 GR C</option>
-                            <option value="A-572">A-572</option>
-                            <option value="A588">A588</option>
-                            <option value="A-240 304">A-240 304</option>
-                            <option value="5083-O, ASTM B221 Aluminum"> 5083-O, ASTM B221 Aluminum</option>
-                            <option value="4140 Alloy Steel">4140 Alloy Steel</option>
-                            <option value="4140CDA">4140CDA</option>
-                            
-                        </select>
-                </label>
-                <label for="material-description" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Material Description:</span>
-                        <select name="material-description" id="material-descriptions" ng-model="proposal.items.item.description">
-                            <option value="L1 x 1 x 1/4 THK">L1" x 1" x 1/4"THK</option>
-                            <option value="L1 x 1 x 1/8">L1" x 1" x 1/8"</option>
-                            <option value="L1-1/2 x 1-1/2 x 1/4">L1-1/2" x 1-1/2" x 1/4"</option>
-                            <option value="W10 x 12">W10 x 12</option>
-                            <option value="6 SS Channel 1.92Flg .343web">6" SS Channel 1.92Flg .343web</option>   
-                        </select>
-                </label>
-                <label for="material-weight" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Material Weight:</span>
-                        <select name="material-weight" id="material-descriptions" ng-model="proposal.items.item.weight">
-                            <option value="0.04283333">0.04283333</option>
-                            <option value="0.02291667">0.02291667</option>
-                            <option value="0.06741667">0.06741667</option>
-                            <option value="0.03525">0.03525</option>
-                        </select>
-                </label>
-                <div class="item item-input item-stacked-label border-none">
-                    <div class="col">
-                    <label for="item-length" class="item-input item-stacked-label border-none">
-                        <span class="input-label">Length:</span>
-                        <input type="number" name="item-length" id="item-length" min="0.01" step="0.01" max="2500" size="10" max-length="16" ng-model="proposal.items.item.length"> ft
-                    </label>
-                    </div>
-                    <div class="col">
-                    <label for="item-width" class="item-input item-stacked-label border-none">
-                        <span class="input-label">Width:</span>
-                        <input type="number" name="item-width" id="item-width" min="0.01" step="0.01" max="2500" size="10" max-length="16" ng-model="proposal.items.item.width"> ft
-                    </label>
-                    </div>
-                </div>
-                <label for="item-quantity" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Quantity:</span>
-                    <input type="number" name="item-quantity" id="item-quantity" max-length="20" ng-model="proposal.items.item.quantity">
-                </label>
-                <label for="item-unit-price" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Unit Price($):</span>
-                    <input type="number" name="item-unit-price" id="item-unit-price" min="0.01" step="0.01" max="2500" size="10" max-length="20" ng-model="proposal.items.item.unitPrice">
-                </label>
-                <label for="item-unit-note" class="item item-input item-stacked-label border-none">
-                    <span class="input-label">Note:</span>
-                    <textarea name="item-note" id="item-note" size="100" ng-model="proposal.items.item.note"></textarea>
-                </label>     
-            </div>
+    <ion-header-bar class="bar-balanced">
+        <h1 class="title">Add an Item</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeAddItem()">Close</button>
         </div>
-        <div class="row responsive-sm lastRow">
+    </ion-header-bar>
+    <ion-content>
+        <div class="row">
+            <h4>
+                Step 1. Select an Item Type:
+            </h4>
+        </div>
+        <div class="row">
             <div class="col">
-                <label class="item item-input border-none">
-                <button class="button button-block button-positive" type="submit">Add Item</button>
-                </label>
-                 <label class="item item-input border-none">
-                <button class="button button-block button-outline button-positive" type="submit">Cancel</button>
-                </label>
+                <button class="button button-default button-block" ng-class="{'button-balanced': step1 =='rawMaterials'}" value="rawMaterials" ng-click="step1 = 'rawMaterials' ; proposal.items.item.type = 'material'">
+                      <i ng-show="step1 == 'rawMaterials'" class="icon ion-checkmark"></i> Raw Materials
+                </button>
+            </div>
+            <div class="col">
+                <button class="button button-default button-block" value="parts" ng-class="{'button-balanced': step1 =='parts'}" ng-click="step1 = 'parts'; proposal.items.item.type = 'part'">
+                      <i ng-show="step1 == 'parts'" class="icon ion-checkmark"></i> Fittings and Parts</button>
             </div>
         </div>
-    </form>
-  </ion-content>
+        <form ng-submit="saveItem()" name="addItemForm">
+            <!-- material types -->
+            <span ng-show="step1 == 'rawMaterials'">
+                <div class="row">
+                    <h4>Step 2:</h4> 
+                </div>
+                    <div class="row">
+                            <div class="col">
+                                <label for="item-material-type" class="item item-input item-stacked-label border-none">
+                                   
+                                <span class="input-label">Material Type:</span> <br />
+            <select name="item-material-type" ng-change="changeValue(materialTypeSelected)" id="item-material-type" ng-model="proposal.items.item.materialType" class="form-control">
+                                        <option value="angle">Angle</option>
+                                        <option value="beam">Beam</option>
+                                        <option value="channel">Channel</option>
+                                        <option value="flatbar">Flatbar</option>
+                                        <option value="grating">Grating</option>
+                                        <option value="pipe">Pipe</option>
+                                        <option value="plate">Plate</option>
+                                        <option value="roundbar">Round Bar</option>
+                                        <option value="tee">Tee</option>
+                                        <option value="tube-rectanglge">Tube Rectangle</option>
+                                        <option value="tube-square">Tube Square</option>
+                                        <option vlaue="other">Other</option>
+                                    </select>
+            </label>
+            </div>
+            <div class="col">
+                <label for="item-process" class="item item-input item-stacked-label border-none">
+                                    <span class="input-label">Process:</span>
+                                    <br />
+                                    <select name="item-process" id="item-process" ng-model="proposal.items.item.process">
+                                        <option value="aluminum">Aluminum</option>
+                                        <option value="carbon-steel">Carbon Steel</option>
+                                        <option value="copper-clad">Copper Clad</option>
+                                        <option value="stainless-steel">Stainless Steel</option>
+                                        <option value="fiberglass">Fiberglass</option>
+                                        <option value="hast-alloy">Hast Alloy</option>
+                                        <option value="monel">Monel</option>
+                                        <option value="nickle-inconel">Nickle Inconel</option>
+                                    </select>
+                                </label>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="item-specifications" class="item item-input item-stacked-label border-none">
+                            <span class="input-label">Specifications:</span>
+                            <br />
+                                <select name="item-specifications" id="item-specifications" ng-model="proposal.items.item.specifications">
+                                    <option value="6061-T6">6061-T6</option>
+                                    <option value="A-36">A-36</option>
+                                    <option value="A-572"> A-572</option>
+                                    <option value="ASTM A588">ASTM A588</option>
+                                    <option value="316/316L - ASTM A276">316/316L - ASTM A276</option>
+                                    <option value="ASTM A-240 - 304/304L">ASTM A-240 - 304/304L</option>
+                                    <option value="6061-T6">6061-T6L</option>
+                                    <option value="A-572 GR 50">A-572 GR 50</option>
+                                    <option value="A-992">A-500 GR C</option>
+                                    <option value="A-572">A-572</option>
+                                    <option value="A588">A588</option>
+                                    <option value="A-240 304">A-240 304</option>
+                                    <option value="5083-O, ASTM B221 Aluminum"> 5083-O, ASTM B221 Aluminum</option>
+                                    <option value="4140 Alloy Steel">4140 Alloy Steel</option>
+                                    <option value="4140CDA">4140CDA</option>
+                                </select>
+                            </label>
+                </div>
+
+                <div class="col list">
+                    <label for="material-description" class="item item-input item-stacked-label border-none">
+                            <span class="input-label">Material Description:</span>
+                            <br />
+                                <select name="material-description" id="material-descriptions" ng-model="proposal.items.item.description">
+                                    <option value="L1 x 1 x 1/4 THK">L1" x 1" x 1/4"THK</option>
+                                    <option value="L1 x 1 x 1/8">L1" x 1" x 1/8"</option>
+                                    <option value="L1-1/2 x 1-1/2 x 1/4">L1-1/2" x 1-1/2" x 1/4"</option>
+                                    <option value="W10 x 12">W10 x 12</option>
+                                    <option value="6 SS Channel 1.92Flg .343web">6" SS Channel 1.92Flg .343web</option>   
+                                </select>
+                            </label>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!-- /material types -->
+            <div class="row">
+                <div class="col">
+                    <label for="item-length" class="item-input item-stacked-label border-none">
+                                <span class="input-label">Length(ft):</span>
+                                <br />
+                                <input type="number" name="item-length" id="item-length" min="0.01" step="0.01" max="2500" size="10" max-length="16" ng-model="proposal.items.item.length">
+                            </label>
+                </div>
+                <div class="col">
+                    <label for="item-width" class="item-input item-stacked-label border-none">
+                                <span class="input-label">Width(ft):</span>
+                                <br />
+                                <input type="number" name="item-width" id="item-width" min="0.01" step="0.01" max="2500" size="10" max-length="16" ng-model="proposal.items.item.width" ng-change="calculateWeight()">
+                            </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="material-weight" class="item item-input item-stacked-label border-none">
+                        <span class="input-label">Material Weight:</span>
+                        <br />
+                            {{ proposal.items.item.weight | number }} (lbs)
+                        </label>
+                </div>
+                <div class="col">
+                    <label for="material-weight" class="item item-input item-stacked-label border-none">
+                        <span class="input-label">Unit Price:</span>
+                        <br />
+                           $ {{ proposal.items.item.unitPrice | number }}
+                        </label>
+                </div>
+            </div>
+            </span>
+            <!-- parts -->
+            <span ng-show="step1 == 'parts'">
+                <div class="row">
+                <h4>Step 2: </h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+                            <label for="item-part-type" class="item item-input item-stacked-label border-none">
+                                <span class="input-label">Part/Fitting Type:</span>
+            <br />
+            <select name="item-part-type" id="item-part-type" ng-change="changeValue(partTypeSelected)" ng-model="proposal.items.item.partType">
+                        <option value="bushing">Bushing</option>
+                        <option value="clamps">Clamps</option>
+                        <option value="concentric-reducers">Concentric Reducers</option>
+                        <option value="couplings">Couplings</option>
+                        <option value="elbows">Elbows</option>
+                        <option value="fasteners">Fasteners</option>
+                        <option value="flange">Flange</option>
+                        <option value="reducer">Reducer</option>
+                        <option value="sockolet">Sockolet</option>
+                        <option value="stube-end">Stub End</option>
+                        <option value="tees">TEES</option>
+                        <option value="threadolet">Threadolet</option>
+                    </select>
+            </label>
+            </div>
+            <div class="col">
+                <label for="item-part-make" class="item item-input item-stacked-label border-none">
+                                    <span class="input-label">Make:</span>
+                                    <br />
+                                    <select name="item-part-make" id="item-part-make" ng-model="proposal.items.item.partMake">
+                                        <option value="304L">304L</option>
+                                        <option value="316-stainless-steel">316 Stainless Steel</option>
+                                        <option value="ASTM-A105-carbon-steel">ASTM A105 Carbon Steel</option>
+                                    </select>
+                            </label>
+
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="item-part-description" class="item item-input item-stacked-label border-none">
+                                        <span class="input-label">Description:</span>
+                                <br />
+                                <select name="item-part-description" id="item-part-description" ng-model="proposal.items.item.description">
+                                        <option value="1 x 1/2 BUSHING, HEX, THREADED">1" x 1/2" BUSHING, HEX, THREADED</option>
+                                        <option value="2 x 3/4 3,000LBS.">2" x 3/4" 3,000LBS.</option>
+                                        <option value="1-1/2 HEAVY DUTY CLAMP">1-1/2" HEAVY DUTY CLAMP</option>
+                                    </select>
+                            </label>
+                </div>
+                <div class="col">
+                    <label for="item-part-description" class="item item-input item-stacked-label border-none">
+                                        <span class="input-label">Additional Description:</span>
+                                <br />
+                               <textfield ng-model="proposal.items.item.additionalInfo">{{ proposal.items.item.additionalInfo }}</textfield>
+                            </label>
+                </div>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="col right">
+                    <label for="item-quantity" class="item item-input item-stacked-label border-none">
+                                            <span class="input-label">Quantity:</span>
+                            <input type="number" name="item-quantity" id="item-quantity" max-length="20" ng-model="proposal.items.item.quantity">
+                        </label>
+                </div>
+            </div>
+            </span>
+
+            <!-- /parts -->
+            <span ng-show="step1 == 'parts' || step1 == 'rawMaterials'">
+                <div class="row">
+                    <h4>Step 3:</4>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="item-unit-note" class="item item-input item-stacked-label">
+                            
+            <textarea name="item-note" id="item-note" size="100" ng-model="proposal.items.item.note" placeholder="notes" class="item item-input"></textarea>
+            </label>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input border-none">
+                        <button class="button button-block button-positive" type="submit">Add Item</button>
+                    </label>
+                    <label class="item item-input border-none">
+                        <button class="button button-block button-outline button-positive" type="submit">Cancel</button>
+                    </label>
+                </div>
+            </div>
+            <span>
+        </form>
+    </ion-content>
 </ion-modal-view>

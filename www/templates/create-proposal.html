@@ -1,55 +1,78 @@
 <ion-view>
-  <ion-content>
-    <form>
-    <div class="row responsive-sm">
-      <div class="col col-100">    
-        <h1>Create a New Proposal</h1>
-      </div>
-    </div>
-    <div class="row responsive-sm">
-        <div class="col col-20"><h3>Step 1</h3></div>
-        <div class="col col-80">
-            <h3>Details</h3>
-            <label for="proposal-title" class="item item-input item-stacked-label border-none">
+    <ion-content overflow-scroll="true">
+        <form>
+            <div class="row responsive-sm">
+                <div class="col col-100">
+                    <h1>Create a New Proposal</h1>
+                </div>
+            </div>
+            <div class="row responsive-sm">
+                <div class="col col-20">
+                    <h3>Step 1</h3>
+                </div>
+                <div class="col col-80">
+                    <h3>Details</h3>
+                    <label for="proposal-title" class="item item-input item-stacked-label border-none">
             <span class="input-label">Proposal Title</span>
                 <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title" size="50" required>
             </label>
-            <label for="proposal-description" class="item item-input border-none item-stacked-label">
+                    <label for="proposal-description" class="item item-input border-none item-stacked-label">
                 <span class="input-label">Description</span>
                 <textarea style="border: 1px solid #e1e1e1;" name="proposal-description" id="proposal-description" ng-model="proposal.description" rows="4" cols="80" required></textarea>
             </label>
-                <label for="request-due-date" class="item item-input item-stacked-label border-none">
+                    <label for="request-due-date" class="item item-input item-stacked-label border-none">
                 <span class="input-label">Due Date</span>
                 <input type="date" name="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate" required>
             </label>
-                <label for="request-po-number" class="item item-input item-stacked-label border-none">
+                    <label for="request-po-number" class="item item-input item-stacked-label border-none">
                 <span class="input-label">PO Number</span>
                 <input type="number" name="proposal-po-number" maxlength="32" id="proposal-po-number" ng-model="proposal.poNumber" required>
             </label>
-            <h3>Items</h3>
-        <p>Click or tap the button below to add items to your proposal.</p>
-   
-                <ion-item ng-repeat="item in proposal.items">
-                    <p>Material Type: <span class="item-note">{{item.materialType}}</span></p>
-                    <p>Process: <span class="item-note">{{item.process}}</span></p>
-                    <p>Specifications: <span class="item-note">{{item.specifications}}</span></p>
-                    <p>Description: <span class="item-note">{{item.description}}</span></p>
-                    <p>Weight: <span class="item-note">{{item.weight}}</span></p>
-                    <p>Length: <span class="item-note">{{item.length}}</span></p>
-                    <p>Width: <span class="item-note">{{item.width}}</span></p>
-                    <p>Quantity: <span class="item-note">{{item.quantity}}</span></p>
-                    <p>Unit Price: <span class="item-note">{{item.unitPrice | currency }}</span></p>
+                    <h3>Items</h3>
+                    <p>Click or tap the button below to add items to your proposal.</p>
+
+                    <ion-item ng-repeat="item in proposal.items" class="card">
+                        <span ng-if="item.type == 'material'">
+                        <h4 class="card-title">{{item.materialType}}</h4>
+                       <br />
+                       <p><strong>Process:</strong> <span class="right">{{item.process}}</span></p>
+                        <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
+                        <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
+                        <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
+                        <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
+                        <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
+                        <hr />
+                        <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
+
+                        <span ng-if="item.note.length > 0">
+                            <br />
+                            <hr>
+                            <p><strong>Notes:</strong></p>
+                            <p>{{item.note}} </p></span>
+                        </span>
+
+                        <span ng-if="item.type == 'part'">
+                        <h4 class="card-title">{{item.partType}}</h4>
+                            <br />
+                             <p><strong>Part Make:</strong> <span class="right">{{item.partMake}}</span></p>
+                        <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
+
+                        <p><strong>Quantity:</strong> <span class="right">{{item.quantity| number}}</span></p>
+                        <hr />
+                        <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
+
+                        <span ng-if="item.note.length > 0">
+                                <br />
+                                <hr>
+                                <p><strong>Notes:</strong></p>
+                                <p>{{item.note}} </p></span>
+                        </span>
+                    </ion-item>
+
+                    <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
                     <hr />
-                    <p>Note:</p>
-                    <p>{{item.note}}</p>
-                </ion-item>
-               
-                <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
-                 <hr />
-                <a href="#/app/proposals/{{proposal.id}}" 
-                    class="button button-block button-positive" 
-                    ng-click="createProposal()">Save and Continue</a>
-    </div>
-  </form>
-  </ion-content>
+                    <a href="#/app/proposals/{{proposal.id}}" class="button button-block button-positive" ng-click="createProposal()">Save and Continue</a>
+                </div>
+        </form>
+    </ion-content>
 </ion-view>

@@ -1,0 +1,141 @@
+<ion-view>
+    <ion-content overflow-scroll="true">
+        <div class="row responsive-sm">
+            <!-- left col -->
+            <div class="col col-25">
+                <!-- categories -->
+                <div>
+                    <ion-item class="border-none">
+                        <span class="component-title">Browse By</span>
+                    </ion-item>
+                    <ion-item class="border-none">
+                        <form>
+                            <label for="item-material-type" class="item item-input item-stacked-label border-none">
+                    <span class="input-label">Material Type:</span>
+                    <br />
+                        <select name="item-material-type" id="item-material-type" ng-model="proposal.items.item.materialType">
+                            <option value="angle">Angle</option>
+                            <option value="beam">Beam</option>
+                            <option value="channel">Channel</option>
+                            <option value="flatbar">Flatbar</option>
+                            <option value="grating">Grating</option>
+                            <option value="pipe">Pipe</option>
+                            <option value="plate">Plate</option>
+                            <option value="roundbar">Round Bar</option>
+                            <option value="tee">Tee</option>
+                            <option value="tube-rectanglge">Tube Rectangle</option>
+                            <option value="tube-square">Tube Square</option>
+                            <option vlaue="other">Other</option>
+                        </select>
+                    </label>
+                            <label for="item-process" class="item item-input item-stacked-label border-none">
+                        <span class="input-label">Process:</span>
+                        <br />
+                        <select name="item-process" id="item-process" ng-model="proposal.items.item.process">
+                            <option value="aluminum">Aluminum</option>
+                            <option value="carbon-steel">Carbon Steel</option>
+                            <option value="copper-clad">Copper Clad</option>
+                            <option value="stainless-steel">Stainless Steel</option>
+                            <option value="fiberglass">Fiberglass</option>
+                            <option value="hast-alloy">Hast Alloy</option>
+                            <option value="monel">Monel</option>
+                            <option value="nickle-inconel">Nickle Inconel</option>
+                        </select>
+                    </label>
+                            <label for="item-specifications" class="item item-input item-stacked-label border-none">
+                    <span class="input-label">Specifications:</span>
+                    <br />
+                        <select name="item-specifications" id="item-specifications" ng-model="proposal.items.item.specifications">
+                            <option value="6061-T6">6061-T6</option>
+                            <option value="A-36">A-36</option>
+                            <option value="A-572"> A-572</option>
+                            <option value="ASTM A588">ASTM A588</option>
+                            <option value="316/316L - ASTM A276">316/316L - ASTM A276</option>
+                            <option value="ASTM A-240 - 304/304L">ASTM A-240 - 304/304L</option>
+                            <option value="6061-T6">6061-T6L</option>
+                            <option value="A-572 GR 50">A-572 GR 50</option>
+                            <option value="A-992">A-500 GR C</option>
+                            <option value="A-572">A-572</option>
+                            <option value="A588">A588</option>
+                            <option value="A-240 304">A-240 304</option>
+                            <option value="5083-O, ASTM B221 Aluminum"> 5083-O, ASTM B221 Aluminum</option>
+                            <option value="4140 Alloy Steel">4140 Alloy Steel</option>
+                            <option value="4140CDA">4140CDA</option>
+                        </select>
+                    </label>
+                            <label for="material-description" class="item item-input item-stacked-label border-none">
+                    <span class="input-label">Material Description:</span>
+                    <br />
+                        <select name="material-description" id="material-descriptions" ng-model="proposal.items.item.description">
+                            <option value="L1 x 1 x 1/4 THK">L1" x 1" x 1/4"THK</option>
+                            <option value="L1 x 1 x 1/8">L1" x 1" x 1/8"</option>
+                            <option value="L1-1/2 x 1-1/2 x 1/4">L1-1/2" x 1-1/2" x 1/4"</option>
+                            <option value="W10 x 12">W10 x 12</option>
+                            <option value="6 SS Channel 1.92Flg .343web">6" SS Channel 1.92Flg .343web</option>   
+                        </select>
+                    </label>
+                            <br />
+                            <label for="item-length" class="item-input item-stacked-label border-none">
+                        <span class="input-label">Length(ft):</span>
+                        <br />
+                        <input type="number" name="item-length" id="item-length" min="0.01" step="0.01" max="2500" size="10" max-length="16" ng-model="proposal.items.item.length">
+                    </label>
+                            <label for="item-width" class="item-input item-stacked-label border-none">
+                        <span class="input-label">Width(ft):</span>
+                        <br />
+                        <input type="number" name="item-width" id="item-width" min="0.01" step="0.01" max="2500" size="10" max-length="16" ng-model="proposal.items.item.width">
+                    </label>
+                        </form>
+                        </p>
+                    </ion-item>
+                </div>
+                <!-- filters -->
+                <div ng-controller="FilterCtrl">
+                    <ion-item class="border-none">
+                        <span class="component-title">Filters</span>
+                    </ion-item>
+                    <ion-item ng-repeat="filter in filters" class="border-none row-no-padding push-right-16">
+                        <form>
+                            <input type="checkbox" />
+                            <label>{{filter.type}}</label>
+                        </form>
+                        </p>
+                    </ion-item>
+                </div>
+            </div>
+            <!-- /left col -->
+            <!-- right col -->
+            <div class="col col-75">
+                <ion-item class="border-none">
+                    <span class="component-title">Materials for Sale</span>
+                </ion-item>
+                <div ng-controller="MarketplaceCtrl">
+                    <ion-item class="border-none">
+                        <span class="item-input-inset">
+                        <label class="item-input-wrapper">
+                          <i class="icon fa fa-search placeholder-icon"></i>
+                          <input type="text" placeholder="Search for materials, parts, fittings, etc.">
+                        </label>
+                      </span>
+                    </ion-item>
+                    <ion-item class="border-none row-no-padding" ng-repeat="material in materials">
+                        <div class="right col-33">
+                            <button class="button button-balanced button-block">Contact Seller</button>
+                        </div>
+                        <div class="col col-33 left">
+                            <img ng-src={{material.img}} class="marketplace-img" />
+                        </div>
+                        <div class="col">
+                            <h2>{{material.title}}</h2>
+                            <p><strong>Amount</strong> {{material.amount}}</p>
+                            <p><strong>Location:</strong> {{material.location}}</p>
+                        </div>
+                    </ion-item>
+
+                </div>
+            </div>
+            <!-- /right col -->
+        </div>
+        <!-- /logged in view -->
+    </ion-content>
+</ion-view>

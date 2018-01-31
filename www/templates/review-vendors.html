@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-content>
+    <ion-content overflow-scroll="true">
         <div class="row">
             <div class="col col-100">
                 <h1>Review Suppliers</h1>
@@ -27,7 +27,7 @@
                 <form>
                     <div class="row">
                         <div class="col">
-                            <ion-item class="card" ng-repeat="vendor in vendors | filter : { materialType : filteredMaterials } :containsComparator">
+                            <ion-item class="card" ng-repeat="vendor in vendors | filter: { materialType: 'stainless-steel' }">
                                 <div class="card-title">
                                     <strong>{{vendor.company}}</strong>
                                 </div>
@@ -47,8 +47,9 @@
                                 <!-- -->
                                 <hr />
                                 <span>&nbsp;</span>
-                                <h4>Material Capabilities</h4>
-                                <p><strong>Type:</strong> <span class="right">{{vendor.materialType}}</span></p>
+                                <h4>Material/Part Capabilities</h4>
+                                <p><strong>Material Type:</strong> <span class="right">{{vendor.materialType}}</span></p>
+                                <p><strong>Part Type:</strong> <span class="right">{{vendor.partType}}</span></p>
                                 <p><strong>Process:</strong> <span class="right">{{vendor.processType}}</span></p>
                                 <p><strong>Specifications</strong> <span class="right">{{vendor.specifications}}</span></p>
                                 <br />

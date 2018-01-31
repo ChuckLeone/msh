@@ -1,18 +1,19 @@
 <ion-view>
-  <ion-content>
-    <div class="row">
-        <div class="col">
-           <h2>Browse Available Requests</h2></div>
-    </div>
-    <div class="row">
-      <div class="col col-50">
-        <h3>Choose a material type:</h3>
-        <ion-list>
-          <ion-item ng-repeat="type in types" href="#/app/types/{{type.title}}">
-             {{type.title}}
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
-  </ion-content>
+    <ion-content overflow-scroll="true">
+        <div class="row">
+            <div class="col">
+                <h2>Browse Available Requests</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50">
+                <h3>Choose a material type:</h3>
+                <ion-list>
+                    <ion-item ng-repeat="type in types" href="#/app/types/{{type.title}}">
+                        {{type.title}}
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

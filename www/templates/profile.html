@@ -1,24 +1,26 @@
 <ion-view>
-    <ion-content>
+    <ion-content overflow-scroll="true">
         <div ng-if="state.loggedIn == !true">
             <div class="row">
                 <div class="col col-50">
-                <p>You have logged out. Please login to view your profile.</p>
-                <h2>Not a member?</h2>
-               <p>
-                   <ion-item menu-close href="#/app/create-profile">
-                Create a profile <i class="ion-chevron-right"></i>
-              </ion-item>
-              </p>
-              </div>
+                    <p>You have logged out. Please login to view your profile.</p>
+                    <h2>Not a member?</h2>
+                    <p>
+                        <ion-item menu-close href="#/app/create-profile">
+                            Create a profile <i class="ion-chevron-right"></i>
+                        </ion-item>
+                    </p>
+                </div>
             </div>
         </div>
         <div ng-if="state.loggedIn == true">
             <div class="row">
-                <div class="col"><h2>My Profile</h2></div>
+                <div class="col">
+                    <h2>My Profile</h2>
+                </div>
             </div>
             <div class="row">
-               
+
                 <div class="col col-50">
                     <h3>Contact Info</h3>
                     <span>
@@ -26,11 +28,11 @@
                         <p>{{ profile.phone }}</p>
                         <p>{{ profile.email }}</p>
                     </span>
-                     <span>
+                    <span>
                         <img ng-src={{profile.face}} class="user-avatar" />
                     </span>
                 </div>
-                 <div class="col col-50">
+                <div class="col col-50">
                     <h3>Company</h3>
                     <p>{{ profile.company }}</p>
                     <p>{{ profile.address1 }}</p>
@@ -43,5 +45,5 @@
                 </div>
             </div>
         </div>
-    <ion-content>
-<ion-view>
+    </ion-content>
+</ion-view>

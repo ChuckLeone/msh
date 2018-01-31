@@ -175,12 +175,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
     })
 
-    .state('app.playlists', {
-        url: '/playlists',
+    .state('app.marketplace', {
+        url: '/marketplace',
         views: {
             'menuContent': {
-                templateUrl: 'templates/playlists.html',
-                controller: 'PlaylistsCtrl'
+                templateUrl: 'templates/marketplace.html'
+            }
+        }
+    })
+
+    .state('app.admin', {
+        url: '/amin',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/admin.html',
+                controller: 'AdminCtrl'
             }
         }
     })

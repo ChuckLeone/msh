@@ -40,6 +40,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.steel.com',
         international: true,
         materialType: 'stainless-steel',
+        partType: 'clamps, brackets, bolts',
         processType: 'plate',
         specifications: 'ASTM A588',
         face: 'img/logo.jpg',
@@ -58,6 +59,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.metalsupplyusa.com',
         international: true,
         materialType: 'channel',
+        partType: 'clamps, brackets',
         processType: 'aluminum',
         specifications: 'A-572',
         face: 'img/logo.jpg',
@@ -77,6 +79,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.starkindustires.com',
         international: true,
         materialType: 'beam',
+        partType: 'clamps, brackets',
         processType: 'iron',
         specifications: 'A-36',
         face: 'img/logo-stark.jpg',
@@ -95,6 +98,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.copperinc.com',
         international: true,
         materialType: 'pipe',
+        partType: 'clamps, brackets',
         processType: 'copper-clad',
         specifications: '6061-T6',
         face: 'img/logo.jpg',
@@ -113,6 +117,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.fasteel.com',
         international: true,
         materialType: 'stainless-steel',
+        partType: 'clamps, brackets',
         processType: 'nickle-inconel',
         specifications: 'ASTM A588',
         face: 'img/logo.jpg',
@@ -131,6 +136,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.metalheads.com',
         international: true,
         materialType: 'angle',
+        partType: 'clamps, brackets',
         processType: 'hast-alloy',
         specifications: 'ASTM A588',
         face: 'img/logo.jpg',
@@ -149,6 +155,7 @@ angular.module('starter.services', ['ngStorage'])
         url: 'http://www.fiberglassking.com',
         international: true,
         materialType: 'plate',
+        partType: 'clamps, brackets',
         processType: 'fiberglass',
         specifications: 'ASTM A588',
         face: 'img/logo.jpg',
@@ -324,12 +331,15 @@ angular.module('starter.services', ['ngStorage'])
             console.log(items);
             items.push({
                 id: item.id,
+                type: $scope.proposal.item.type,
                 materialType: $scope.proposal.item.materialType,
+                partType: $scope.proposal.item.partType,
                 process: $scope.proposal.item.process,
+                partMake: $scope.proposal.item.partMake,
                 specifications: $scope.proposal.item.specifications,
                 description: $scope.proposal.item.description,
                 weight: $scope.proposal.item.weight,
-                wwidth: $scope.proposal.item.width,
+                width: $scope.proposal.item.width,
                 length: $scope.proposal.item.length,
                 quantity: $scope.proposal.item.quantity,
                 unitPrice: $scope.proposal.item.unitPrice,
@@ -350,4 +360,251 @@ angular.module('starter.services', ['ngStorage'])
         }
     };
 
+})
+
+.factory('Filters', function() {
+    var filters = [
+        { id: 0, type: 'stainless-steel' },
+        { id: 1, type: 'iron' },
+        { id: 2, type: 'aluminum' },
+        { id: 3, type: 'copper-clad' },
+        { id: 4, type: 'brass' },
+        { id: 5, type: 'lead' },
+        { id: 6, type: 'fiberglass' },
+    ];
+
+    return {
+        all: function() {
+            return filters;
+        },
+        // remove: function(vendor) {
+        //     vendors.splice(vendors.indexOf(vendor), 1);
+        // },
+        get: function(filterId) {
+            for (var i = 0; i < filters.length; i++) {
+                if (filters[i].id === parseInt(filterId)) {
+                    return filters[i];
+                }
+            }
+            return null;
+        }
+    };
+})
+
+.factory('Materials', function() {
+    var materials = [
+        { id: 0, type: 'stainless-steel', unitPrice: '$245.90', title: 'Stainless Steel for Sale', amount: '2.2 tons', location: 'USA', img: 'img/steel-tubing.jpg' },
+        { id: 1, type: 'iron', unitPrice: '$253.20', title: 'Iron Pipes', amount: '2.2 tons', location: 'USA', img: 'img/cast-iron-pipes.jpg' },
+        { id: 2, type: 'aluminum', unitPrice: '$89.00', title: 'Aluminum for Sale', amount: '210 lbs', location: 'USA', img: 'img/aluminum-bars.jpg' },
+        { id: 3, type: 'copper-clad', unitPrice: '$67.40', title: 'Copper Pipes', amount: '21 lbs', location: 'USA', img: 'img/copper-pipes.jpg' },
+        { id: 4, type: 'brass', unitPrice: '$33.10', title: 'Reclaimed Brass', amount: '1 ton', location: 'USA', img: 'img/brass-tubing.jpg' },
+        { id: 5, type: 'lead', unitPrice: '$24.23', title: 'Lead', amount: '12 lbs', location: 'USA', img: 'img/lead.jpg' },
+        { id: 6, type: 'fiberglass', unitPrice: '$15.90', title: 'Sheets of fiberglass', amount: '120 spools', location: 'USA', img: 'img/fiberglass-spools.jpg' },
+    ];
+
+    return {
+        all: function() {
+            return materials;
+        },
+        remove: function(material) {
+            materials.splice(materials.indexOf(material), 1);
+        },
+        get: function(materialId) {
+            for (var i = 0; i < materials.length; i++) {
+                if (materials[i].id === parseInt(materialId)) {
+                    return materials[i];
+                }
+            }
+            return null;
+        }
+    };
+})
+
+.factory('MaterialsDatabase', function() {
+    var materials = [{
+            id: 0,
+            type: 'plate',
+            process: 'aluminum',
+            specifications: '',
+            description: '1/8"',
+            weight: '0.352'
+        },
+        {
+            id: 1,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: 'Alloy 600',
+            description: '1-1/4" SCH 80 - SMLS',
+            weight: '2.2'
+        },
+        {
+            id: 2,
+            type: 'angle',
+            process: 'carbon steel',
+            specifications: 'Ti Grade 2',
+            description: '3/8" DIA',
+            weight: '0.0208'
+        },
+        {
+            id: 3,
+            type: 'pipe',
+            process: 'nickle inconel',
+            specifications: 'Alloy 600',
+            description: '1/4 " DIA',
+            weight: '0.25'
+        },
+        {
+            id: 4,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: '5083-H111, Class 1 Armor',
+            description: '1-1/2" DIA',
+            weight: '0.0335'
+        },
+        {
+            id: 5,
+            type: 'plate',
+            process: 'aluminum',
+            specifications: '',
+            description: '1/8"',
+            weight: '0.352'
+        },
+        {
+            id: 6,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: 'Alloy 600',
+            description: '1-1/4" SCH 80 - SMLS',
+            weight: '2.2'
+        },
+        {
+            id: 7,
+            type: 'angle',
+            process: 'carbon steel',
+            specifications: 'Ti Grade 2',
+            description: '3/8" DIA',
+            weight: '0.0208'
+        },
+        {
+            id: 8,
+            type: 'pipe',
+            process: 'nickle inconel',
+            specifications: 'Alloy 600',
+            description: '1/4 " DIA',
+            weight: '0.25'
+        },
+        {
+            id: 9,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: '5083-H111, Class 1 Armor',
+            description: '1-1/2" DIA',
+            weight: '0.0335'
+        },
+        {
+            id: 10,
+            type: 'plate',
+            process: 'aluminum',
+            specifications: '',
+            description: '1/8"',
+            weight: '0.352'
+        },
+        {
+            id: 11,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: 'Alloy 600',
+            description: '1-1/4" SCH 80 - SMLS',
+            weight: '2.2'
+        },
+        {
+            id: 12,
+            type: 'angle',
+            process: 'carbon steel',
+            specifications: 'Ti Grade 2',
+            description: '3/8" DIA',
+            weight: '0.0208'
+        },
+        {
+            id: 13,
+            type: 'pipe',
+            process: 'nickle inconel',
+            specifications: 'Alloy 600',
+            description: '1/4 " DIA',
+            weight: '0.25'
+        },
+        {
+            id: 14,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: '5083-H111, Class 1 Armor',
+            description: '1-1/2" DIA',
+            weight: '0.0335'
+        },
+        {
+            id: 15,
+            type: 'plate',
+            process: 'aluminum',
+            specifications: '',
+            description: '1/8"',
+            weight: '0.352'
+        },
+        {
+            id: 16,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: 'Alloy 600',
+            description: '1-1/4" SCH 80 - SMLS',
+            weight: '2.2'
+        },
+        {
+            id: 17,
+            type: 'angle',
+            process: 'carbon steel',
+            specifications: 'Ti Grade 2',
+            description: '3/8" DIA',
+            weight: '0.0208'
+        },
+        {
+            id: 18,
+            type: 'pipe',
+            process: 'nickle inconel',
+            specifications: 'Alloy 600',
+            description: '1/4 " DIA',
+            weight: '0.25'
+        },
+        {
+            id: 19,
+            type: 'round bar',
+            process: 'titanium',
+            specifications: '5083-H111, Class 1 Armor',
+            description: '1-1/2" DIA',
+            weight: '0.0335'
+        },
+        {
+            id: 20,
+            type: 'round bar',
+            process: 'aluminum',
+            specifications: 'Alloy',
+            description: '1/2" DIA',
+            weight: '0.35'
+        },
+    ];
+
+    return {
+        all: function() {
+            return materials;
+        },
+        remove: function(material) {
+            materials.splice(materials.indexOf(material), 1);
+        },
+        get: function(materialId) {
+            for (var i = 0; i < materials.length; i++) {
+                if (materials[i].id === parseInt(materialId)) {
+                    return materials[i];
+                }
+            }
+            return null;
+        }
+    };
 });

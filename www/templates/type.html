@@ -1,16 +1,18 @@
 <ion-view view-title={{type.title}}>
-  <ion-content>
-      <div class="row">
-        <div class="col"><h3>Available {{type.title}} Requests:</h3></div>
-    </div>
-    <div class="row">
-      <div class="col col-50">
-        <ion-list>
-          <ion-item ng-repeat="request in requests" href="#/app/requests/{{request.id}}">
-             {{request.title }}
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>        
-  </ion-content>
+    <ion-content overflow-scroll="true">
+        <div class="row">
+            <div class="col">
+                <h3>Available {{type.title}} Requests:</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50">
+                <ion-list>
+                    <ion-item ng-repeat="request in requests" href="#/app/requests/{{request.id}}">
+                        {{request.title }}
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
