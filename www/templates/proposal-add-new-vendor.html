@@ -1,0 +1,48 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-balanced">
+        <h1 class="title">Add a New Vendor</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeAddVendor()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="saveNewVendor()" name="addVendorForm">
+            <div class="row">
+                <div class="col">
+                    <form name="newVendor" ng-submit="addVendor">
+                        <ion-item style="border: none;">
+                            <label for="newVendorCompany" class="item item-input item-stacked-label border-none">
+                                        <span class="input-label">Company</span>
+                                        <input type="text" ng-model="proposal.vendors.vendor.company" name="newVendor-company" id="newVendorCompany" size="50">
+                                    </label>
+                            <label for="newVendorContact" class="item item-input item-stacked-label border-none">
+                                        <span class="input-label">Contact</span>
+                                        <input type="text" ng-model="proposal.vendors.vendor.contact" name="newVendor-contact" id="newVendorContact" size="50">
+                                    </label>
+                            <label for="newVendorEmail" class="item item-input item-stacked-label border-none">
+                                        <span class="input-label">Email Address</span>
+                                        <input type="text" ng-model="proposal.vendors.vendor.email" name="newVendor-email" id="newVendorEmail" size="50">
+                                    </label>
+                            <label for="newVendorLocation" class="item item-input item-stacked-label border-none">
+                                        <span class="input-label">Location</span>
+                                        <input type="text" ng-model="proposal.vendors.vendor.location" name="newVendor-location" id="newVendorLocation" size="50">
+                                    </label>
+                        </ion-item>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input border-none">
+                        <button class="button button-block button-positive" type="submit">Add Vendor</button>
+                    </label>
+                    <label class="item item-input border-none">
+                        <button class="button button-block button-outline button-positive" type="submit">Cancel</button>
+                    </label>
+                </div>
+            </div>
+            <span>
+        </form>
+    </ion-content>
+</ion-modal-view>

@@ -20,8 +20,10 @@
             <div class="col col-80">
                 <h2>Matching Suppliers</h2>
                 <strong>Matched by:</strong>
-                <p><span ng-repeat="item in proposal.items"> 
-                {{item.materialType + ', &nbsp'}} {{item.process}}, &nbsp</span>
+                <p>
+                    <span ng-repeat="item in proposal.items"> 
+                        {{item.materialType + ', &nbsp'}} {{item.process}}, &nbsp
+                    </span>
                 </p>
                 <!-- begin proposal-->
                 <form>
@@ -66,24 +68,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <ion-item>
-                                <label for="newVendor-company" class="item item-input item-stacked-label border-none">
-                            <span class="input-label">Company</span>
-                            <input type="text" ng-model="newVendor.company" name="newVendor-company" id="newVendor-company" size="50">
-                      </label>
-                                <label for="newVendor-contact" class="item item-input item-stacked-label border-none">
-                            <span class="input-label">Contact</span>
-                            <input type="text" ng-model="newVendor.contact" name="newVendor-contact" id="newVendor-contact" size="50">
-                      </label>
-                                <label for="newVendor-email" class="item item-input item-stacked-label border-none">
-                            <span class="input-label">Email Address</span>
-                            <input type="text" ng-model="newVendor.email" name="newVendor-email" id="newVendor-email" size="50">
-                      </label>
-                                <label for="newVendor-location" class="item item-input item-stacked-label border-none">
-                            <span class="input-label">Location</span>
-                            <input type="text" ng-model="newVendor.location" name="newVendor-location" id="newVendor-location" size="50">
-                      </label>
-                            </ion-item>
+                            <button class="button button-block button-stable" ng-click="addNewVendor()">Add New Vendor</button>
                         </div>
                     </div>
                     <div class="row">

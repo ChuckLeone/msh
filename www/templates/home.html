@@ -57,11 +57,11 @@
         <!-- logged in not admin -->
         <div ng-show="((state.loggedIn == true) && (state.admin != true))" class="row responsive-sm">
             <!-- left col -->
-            <div class="col col-25">
+            <div class="col col-25" style="margin-top: -40px;">
                 <!-- my profile -->
                 <div ng-controller="ProfileCtrl" class="list card">
-                    <ion-item>
-                        <span class="component-title">My Details</span>
+                    <ion-item class="component-title">
+                        My Details
                     </ion-item>
                     <ion-item class="item item-avatar">
                         <img ng-src={{profile.logo}} class="profile-logo" />
@@ -87,14 +87,15 @@
                 </div>
                 <!-- my capabilities -->
                 <div class="list card">
-                    <ion-item>
-                        <span class="component-title">My Capabilities</span>
+                    <ion-item class="component-title">
+                        My Capabilities
                     </ion-item>
                     <div ng-controller="ProfileCtrl">
-                        <ion-item class="border-none" ng-repeat="capability in capabilities">
-                            <button class="button text-small icon-left ion-close button-stable">{{capability.title}}</button>
+                        <ion-item class="border-none capability-item" ng-repeat="capability in capabilities">
+                            <button class="button button-small text-small button-stable">
+                                <i class="icon ion-close"></i> {{capability.title}}</button>
                         </ion-item>
-                        <ion-item>
+                        <ion-item style="padding-left: 0;">
                             <span>Add Capabilities</span>
                             <span class="item-input-inset">
                         <label class="item-input-wrapper">
@@ -109,10 +110,10 @@
             </div>
             <!-- /left col -->
             <!-- right col -->
-            <div class="col col-50">
+            <div class="col col-50" style="margin-top: -40px;">
                 <!-- actions -->
                 <div ng-controller="ProfileCtrl" class="list card">
-                    <ion-item class="item"><span class="component-title">Dashboard</span></ion-item>
+                    <ion-item class="item component-title">Dashboard</ion-item>
                     <div class="item-body">
                         <span class="item item-horizontal padding-horizontal align-center" ng-if="profile.type == 'manufacturer'">
                             <button class="button button-positive">{{profile.drafts}}</button>
@@ -154,15 +155,15 @@
                 <!-- /actions -->
                 <!--  my proposal -->
                 <div class="list card">
-                    <ion-item class="item">
-                        <span class="right" ng-if="profile.type == 'manufacturer'">
-                        <a class="button button-small button-positive" href="#/app/create-proposal">
+                    <ion-item class="item component-title">
+                        <span class="right" ng-if="profile.type == 'manufacturer'" ng-controller="NewProposalCtrl">
+                        <button class="button button-small button-positive" ng-click="clearForm()">
                             <i class="icon ion-ios-plus-empty"></i>
                                 New Proposal
-                        </a>
+                        </button>
                         </span>
-                        <span class="component-title" ng-if="profile.type == 'manufacturer'">My Proposals</span>
-                        <span class="component-title" ng-if="profile.type == 'supplier'">Received Proposals</span>
+                        <span ng-if="profile.type == 'manufacturer'">My Proposals</span>
+                        <span ng-if="profile.type == 'supplier'">Received Proposals</span>
                     </ion-item>
                     <div class="item-body">
                         <ion-list ng-controller="ProposalsCtrl">
@@ -180,34 +181,45 @@
                 <!-- /my proposals -->
                 <!--  widgets-->
                 <div class="list card" ng-controller="ProfileCtrl">
-                    <ion-item class="item">
-                        <span class="component-title">My Widgets</span>
+                    <ion-item class="item component-title">
+                        Average Steel Price
                     </ion-item>
-
                     <div class="item-body">
                         <span class="item item-horizontal padding-horizontal">
-                           <p>Average Steel Price</p>
                            <img src="img/dashboard-widget-7-days.png" />
-                        </span>
-                        <span class="item item-horizontal padding-horizontal">
-                          
-                        <p>Sales as of {{ todaysDate | date }}</p>
-                          <img src="img/dashboard-widget-sales.png" />
-                        </span>
-
-                        <span class="item item-horizontal padding-horizontal">
-                        <p>Sales by Region</p>
-                        <img src="img/dashboard-widget-regions.png" />
                         </span>
                     </div>
                 </div>
+
+                <div class="list card" ng-controller="ProfileCtrl">
+                    <ion-item class="item component-title">
+                        Sales as of {{ todaysDate | date }}
+                    </ion-item>
+                    <div class="item-body">
+                        <span class="item item-horizontal padding-horizontal">
+                                <img src="img/dashboard-widget-sales.png" />
+                            </span>
+                    </div>
+                </div>
+
+                <div class="list card" ng-controller="ProfileCtrl">
+                    <ion-item class="item component-title">
+                        Sales by Region
+                    </ion-item>
+                    <div class="item-body">
+                        <span class="item item-horizontal padding-horizontal">
+                                        <img src="img/dashboard-widget-regions.png" />
+                                </span>
+                    </div>
+                </div>
+
                 <!-- /widgets -->
             </div>
-            <div class="col col-25">
+            <div class="col col-25" style="margin-top: -40px;">
                 <!-- communications -->
                 <div class="list card">
-                    <ion-item class="item">
-                        <span class="component-title">Messages</span>
+                    <ion-item class="item component-title">
+                        Messages
                     </ion-item>
                     <span class="item">
                     <button class="button button-assertive" data-ng-controller="ProposalsCtrl">{{proposals.length}}</button>
@@ -217,8 +229,8 @@
                 <!-- /communications -->
                 <!--  activity feed -->
                 <div class="list card" ng-controller="ProfileCtrl">
-                    <ion-item class="item">
-                        <span class="component-title">Activity Feed</span>
+                    <ion-item class="item component-title">
+                        Activity Feed
                     </ion-item>
                     <div class="item-body">
                         <ion-list>

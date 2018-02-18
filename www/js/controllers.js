@@ -237,6 +237,16 @@ angular.module('starter.controllers', [])
         var ids = Proposals.all();
         return id = ids.length + 1;
     }
+
+    $scope.clearForm = function() {
+        setId();
+        newProposal();
+        $state.transitionTo("app.create-proposal");
+    }
+
+    $location = "href=#/app/create-proposal";
+
+    // $scope.proposal = $scope.proposal;
     $scope.proposal = {
         id: setId(),
         title: '',
@@ -250,8 +260,9 @@ angular.module('starter.controllers', [])
     }
 
     $scope.proposals = Proposals.all();
-    $scope.newProposal = function() {
-        $scope.proposal = {
+
+    function newProposal() {
+        proposal = {
             id: '',
             title: '',
             description: '',
@@ -428,7 +439,7 @@ angular.module('starter.controllers', [])
         $state.transitionTo('app.review-proposal');
     };
 
-    $scope.saveProposal = function(proposal) {
+    $scope.saveProposal = function(proposal, newProposal) {
         Proposals.add($scope.proposal);
         Proposals.post();
         $localStorage = Proposals.all(proposal);
@@ -571,7 +582,7 @@ angular.module('starter.controllers', [])
     $scope.request = Requests.get($stateParams.requestId);
 })
 
-.controller('ProposalDetailsCtrl', function($scope, $stateParams, $filter, $state, Proposals, Items, Vendors) {
+.controller('ProposalDetailsCtrl', function($scope, $stateParams, $filter, $state, $ionicModal, Proposals, Items, Vendors) {
     $scope.proposal = Proposals.get($stateParams.proposalId);
     $scope.vendors = Vendors.all();
     $scope.vendors.checked = [];
@@ -581,6 +592,43 @@ angular.module('starter.controllers', [])
         Proposals.remove(proposal);
         $state.transitionTo('app.home');
     }
+
+    $ionicModal.fromTemplateUrl('templates/proposal-add-new-vendor.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    })
+
+    $scope.closeAddVendor = function() {
+        console.log("close");
+        $scope.modal.hide();
+    }
+
+    $scope.addNewVendor = function() {
+        console.log("vendor");
+
+        function setId() {
+            var ids = Vendors.all();
+            return id = ids.length + 1;
+        }
+        $scope.modal.show();
+        $scope.proposal.vendors.vendor = {
+            id: setId(),
+        }
+    }
+
+    $scope.saveNewVendor = function(proposal) {
+        console.log("save vendor");
+        $scope.proposal.vendors.push({
+            id: $scope.proposal.vendors.vendor.id,
+            contact: $scope.proposal.vendors.vendor.contact,
+            company: $scope.proposal.vendors.vendor.company,
+            email: $scope.proposal.vendors.vendor.email,
+            location: $scope.proposal.vendors.vendor.location,
+        });
+
+        $scope.modal.hide();
+    };
 
     $scope.selectVendors = function() {
         var proposal = Proposals.get($stateParams.proposalId);

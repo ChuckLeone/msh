@@ -1,6 +1,6 @@
 <ion-view>
     <ion-content overflow-scroll="true">
-        <form>
+        <form name="newProposal" ng-submit="saveProposal(proposal)">
             <div class="row responsive-sm">
                 <div class="col col-100">
                     <h1>Create a New Proposal</h1>
@@ -13,6 +13,10 @@
                 <div class="col col-80">
                     <h3>Details</h3>
                     <label for="proposal-title" class="item item-input item-stacked-label border-none">
+                            <span class="input-label">Proposal ID</span>
+                                <input type="text" ng-model="proposal.id" name="proposal-id" id="proposal-id" size="2" disabled>
+                            </label>
+                    <label for="proposal-id" class="item item-input item-stacked-label border-none">
             <span class="input-label">Proposal Title</span>
                 <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title" size="50" required>
             </label>
