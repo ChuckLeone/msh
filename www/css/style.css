@@ -110,6 +110,10 @@ input[type="number"] {
     max-width: 100px;
 }
 
+.item-body {
+    padding: 5px;
+}
+
 .item-input {
     padding: 0;
 }
@@ -119,7 +123,13 @@ input[type="number"] {
 }
 
 .item-input textarea {
-    padding: 5px;
+    padding: 2px;
+    margin: 2px;
+}
+
+.item-overRide {
+    margin: 2px 0;
+    padding: 2px 0;
 }
 
 .site-header {

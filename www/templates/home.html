@@ -163,7 +163,7 @@
                         </button>
                         </span>
                         <span ng-if="profile.type == 'manufacturer'">My Proposals</span>
-                        <span ng-if="profile.type == 'supplier'">Received Proposals</span>
+                        <span ng-if="profile.type == 'supplier'">Received Proposals</span>1
                     </ion-item>
                     <div class="item-body">
                         <ion-list ng-controller="ProposalsCtrl">
@@ -234,7 +234,7 @@
                     </ion-item>
                     <div class="item-body">
                         <ion-list>
-                            <ion-item class="item-remove-animate" ng-repeat="item in feed" type="item-text-wrap" href="#">
+                            <ion-item class="item-remove-animate item-overRide" ng-repeat="item in feed" type="item-text-wrap" href="#">
                                 <p>{{item.title}}</p>
                             </ion-item>
                         </ion-list>

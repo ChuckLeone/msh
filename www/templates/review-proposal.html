@@ -23,6 +23,8 @@
             <!-- /side panel -->
             <!-- begin proposal -->
             <div class="col col-80">
+                <!-- check for materials/parts -->
+
                 <div class="row">
                     <div class="col">
                         <h3>Materials</h3>
@@ -32,25 +34,25 @@
                             <p><strong>Item Type:</strong> <span class="right">{{item.type}}</span></p>
                             <p><strong>Process:</strong> <span class="right">{{item.process}}</span></p>
                             <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
+                            <hr />
                             <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
                             <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
                             <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
                             <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
                             <hr />
+                            <p><strong>Quantity:</strong> <span class="right">{{item.quantity | number}}</span></p>
+                            <p><strong>Unit Price:</strong> <span class="right">{{item.unitPrice | currency}}</span></p>
                             <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
-
+                            +
                             <span ng-if="item.note.length > 0">
-                            <br />
-                            <hr>
-                            <p><strong>Notes:</strong></p>
-                            <p>{{item.note}} </p></span>
+                               <br />
+                                 <hr>
+                                <p><strong>Notes:</strong></p>
+                                <p>{{item.note}}</span>
+                            </p>
+                            </span>
                         </ion-item>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
                         <h3>Parts</h3>
-
                         <ion-item ng-repeat="item in proposal.items" ng-if="(item.type == 'part')" class="card">
                             <h4 class="card-title">{{item.partType}}</h4>
                             <br />
@@ -63,10 +65,10 @@
                             <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
 
                             <span ng-if="item.note.length > 0">
-                                <br />
-                                <hr>
-                                <p><strong>Notes:</strong></p>
-                                <p>{{item.note}} </p></span>
+                                    <br />
+                                    <hr>
+                                    <p><strong>Notes:</strong></p>
+                                    <p>{{item.note}} </p></span>
                         </ion-item>
                     </div>
                 </div>

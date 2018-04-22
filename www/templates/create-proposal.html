@@ -6,7 +6,8 @@
                     <h1>Create a New Proposal</h1>
                 </div>
             </div>
-            <div class="row responsive-sm">
+            <!-- Step 1: Proposal Info -->
+            <div class="row responsive-sm" ng-show="state.step === 1">
                 <div class="col col-20">
                     <h3>Step 1</h3>
                 </div>
@@ -17,24 +18,35 @@
                                 <input type="text" ng-model="proposal.id" name="proposal-id" id="proposal-id" size="2" disabled>
                             </label>
                     <label for="proposal-id" class="item item-input item-stacked-label border-none">
-            <span class="input-label">Proposal Title</span>
-                <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title" size="50" required>
-            </label>
+                    <span class="input-label">Proposal Title</span>
+                        <input type="text" ng-model="proposal.title" name="proposal-title" id="proposal-title" size="50" required>
+                    </label>
                     <label for="proposal-description" class="item item-input border-none item-stacked-label">
-                <span class="input-label">Description</span>
-                <textarea style="border: 1px solid #e1e1e1;" name="proposal-description" id="proposal-description" ng-model="proposal.description" rows="4" cols="80" required></textarea>
-            </label>
+                        <span class="input-label">Description</span>
+                        <textarea style="border: 1px solid #e1e1e1;" name="proposal-description" id="proposal-description" ng-model="proposal.description" rows="4" cols="80" required></textarea>
+                    </label>
                     <label for="request-due-date" class="item item-input item-stacked-label border-none">
-                <span class="input-label">Due Date</span>
-                <input type="date" name="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate" required>
-            </label>
+                        <span class="input-label">Due Date</span>
+                        <input type="date" name="proposal-due-date" id="proposal-due-date" ng-model="proposal.dueDate" required>
+                    </label>
                     <label for="request-po-number" class="item item-input item-stacked-label border-none">
-                <span class="input-label">PO Number</span>
-                <input type="number" name="proposal-po-number" maxlength="32" id="proposal-po-number" ng-model="proposal.poNumber" required>
-            </label>
+                        <span class="input-label">PO Number</span>
+                        <input type="number" name="proposal-po-number" maxlength="32" id="proposal-po-number" ng-model="proposal.poNumber" required>
+                    </label>
+                    <hr />
+                    <a class="button button-block button-positive" ng-click="setState(2)">Step 2: Add Items</a>
+                </div>
+            </div>
+            <!-- /Step 1 -->
+            <!-- Step 2: add items -->
+            <div class="row responsive-sm" ng-show="state.step === 2">
+                <div class="col col-20">
+                    <h3>Step 2</h3>
+                    <p>Items: {{proposal.items.length}}</p>
+                </div>
+                <div class="col col-80">
                     <h3>Items</h3>
                     <p>Click or tap the button below to add items to your proposal.</p>
-
                     <ion-item ng-repeat="item in proposal.items" class="card">
                         <span ng-if="item.type == 'material'">
                         <h4 class="card-title">{{item.materialType}}</h4>
@@ -75,8 +87,90 @@
 
                     <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
                     <hr />
-                    <a href="#/app/proposals/{{proposal.id}}" class="button button-block button-positive" ng-click="createProposal()">Save and Continue</a>
+                    <a class="button button-block button-positive" ng-click="setState(1)">Back to Step 1</a>
+                    <a class="button button-block button-positive" ng-click="setState(3)">Step 3: Add Vendors</a>
                 </div>
+            </div>
+            <!-- Step 3: add vendors -->
+            <div class="row responsive-sm" ng-show="state.step === 3">
+                <div class="col col-20">
+                    <h3>Step 3</h3>
+                    <p><strong>Vendors:</strong> {{(proposal.vendors).length | number}}</p>
+                </div>
+                <div class="col col-80">
+                    <span ng-if="(proposal.vendors).length > 0">
+                        <div class="row">
+                            <div class="col">
+                            <ion-item ng-repeat="vendor in proposal.vendors">
+                                <p>Supplier: <span class="right">{{vendor.company}}</span></p>
+                    <p>Contact Name: <span class="right">{{vendor.contact}}</span></p>
+                    <p>Materials Supplied: <span class="right">{{vendor.materialType}}</span>
+                        <form>
+                            <input type="checkbox" checked />
+                            <label>Include on proposal</label>
+                        </form>
+                    </p>
+                    </ion-item>
+                </div>
+            </div>
+            </span>
+            <div class="row">
+                <div class="col">
+                    <p><i class="icon ion-alert-circled energized"></i>There are no suppliers saved to this proposal.</p>
+                    <p> Click or tap the add vendors button to select suppliers to include on this proposal.</p>
+                    <section>
+                        <div class="row">
+                            <div class="col">
+                                <ion-item class="card" ng-repeat="vendor in vendors | filter: { materialType: 'stainless-steel' }">
+                                    <div class="card-title">
+                                        <strong>{{vendor.company}}</strong>
+                                    </div>
+                                    <div class="right">
+                                        <ion-checkbox type="checkbox" ng-model="vendor.vendorChecked" ng-click="vendorChecked(vendor)" />
+                                        <label>Include this supplier on proposal</label>
+
+                                    </div>
+                                    <div class="item item-avatar border-none">
+                                        <img ng-src={{vendor.face}} />
+
+                                        <p>Supplier ID: {{vendor.id}}</p>
+                                        <p><strong>{{vendor.contact}}</strong></p>
+                                        <p>{{vendor.city}}, {{vendor.state}} {{vendor.country}}</p>
+                                    </div>
+
+                                    <!-- -->
+                                    <hr />
+                                    <span>&nbsp;</span>
+                                    <h4>Material/Part Capabilities</h4>
+                                    <p><strong>Material Type:</strong> <span class="right">{{vendor.materialType}}</span></p>
+                                    <p><strong>Part Type:</strong> <span class="right">{{vendor.partType}}</span></p>
+                                    <p><strong>Process:</strong> <span class="right">{{vendor.processType}}</span></p>
+                                    <p><strong>Specifications</strong> <span class="right">{{vendor.specifications}}</span></p>
+                                    <br />
+                                </ion-item>
+                            </div>
+                            <br />
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <h3>Add a Supplier</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button class="button button-block button-stable" ng-click="addNewVendor()">Add New Vendor</button>
+                            </div>
+                        </div>
+                        <!-- <a class="button button-block button-positive" ng-click="selectVendors()">Add Suppliers</a> -->
+                    </section>
+                </div>
+            </div>
+            <a href="#/app/home" class="button button-block button-positive" ng-click="saveProposal()">Save and Submit</a>
+            </div>
+            <!-- /Step 3  -->
+
         </form>
     </ion-content>
 </ion-view>

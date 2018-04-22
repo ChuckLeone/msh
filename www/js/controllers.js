@@ -233,6 +233,23 @@ angular.module('starter.controllers', [])
 })
 
 .controller('NewProposalCtrl', function($scope, $state, $ionicModal, Proposals, Items, Vendors, Materials) {
+    $scope.state = {
+        step: 1
+    }
+
+    $scope.setState = function(val) {
+        if (val === 2) {
+            console.log("state is " + val);
+            return $scope.state.step = 2;
+        }
+        if (val === 3) {
+            console.log("state is " + val);
+            return $scope.state.step = 3;
+        } else {
+            return $scope.state.step = 1;
+        }
+    }
+
     function setId() {
         var ids = Proposals.all();
         return id = ids.length + 1;
@@ -242,6 +259,7 @@ angular.module('starter.controllers', [])
         setId();
         newProposal();
         $state.transitionTo("app.create-proposal");
+        return $scope.setState = 1;
     }
 
     $location = "href=#/app/create-proposal";
@@ -292,10 +310,8 @@ angular.module('starter.controllers', [])
         $scope.modal = modal;
     });
 
-    $scope.step1 = '';
 
     $scope.addItem = function() {
-
         function setId() {
             var ids = Items.all();
             return id = ids.length + 1;
@@ -443,6 +459,7 @@ angular.module('starter.controllers', [])
         Proposals.add($scope.proposal);
         Proposals.post();
         $localStorage = Proposals.all(proposal);
+        //$state.transitionTo("app.create-proposal");
     };
 
     $scope.saveItem = function(proposal) {
@@ -483,6 +500,22 @@ angular.module('starter.controllers', [])
         $scope.saveProposal();
         return this.proposal;
     };
+
+    $scope.vendors = Vendors.all();
+    $scope.vendors.checked = [];
+    $scope.vendor = this.vendor;
+
+    $scope.vendorChecked = function(id) {
+        console.log("vendor added " + id);
+        $scope.vendors.checked.push(id);
+        $scope.proposal.vendors = $scope.vendors.checked;
+    }
+
+    $scope.submitProposal = function(proposal) {
+        Proposals.update($scope.proposal);
+        // Proposals.post();
+        $state.transitionTo('app.home');
+    }
 })
 
 .controller('ProfileCtrl', function($scope, $stateParams, $ionicPopup, $state) {
@@ -654,6 +687,62 @@ angular.module('starter.controllers', [])
         // Proposals.post();
         $state.transitionTo('app.home');
     }
+
+    $scope.getTotalItems = function() {
+        return $scope.items.length;
+    };
+
+    $scope.calculateWeight = function() {
+        $scope.proposal.items.item.weight = ($scope.proposal.items.item.width) + ($scope.proposal.items.item.length) * 10;
+        console.log("runing the calc function" + $scope.proposal.items.item.weight);
+        return $scope.proposal.items.item.weight;
+
+    }
+
+    $scope.closeAddItem = function() {
+            $scope.modal.hide();
+        }
+        // modal for add item
+    $ionicModal.fromTemplateUrl('templates/proposal-add-item.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    $scope.step1 = '';
+
+    $scope.addItem = function() {
+
+        function setId() {
+            var ids = Items.all();
+            return id = ids.length + 1;
+        }
+        $scope.modal.show();
+        $scope.proposal.items.item = {
+            id: setId(),
+        }
+    }
+
+    $scope.saveItem = function(proposal) {
+        $scope.proposal.items.push({
+            id: $scope.proposal.items.item.id,
+            type: $scope.proposal.items.item.type,
+            materialType: $scope.proposal.items.item.materialType,
+            partType: $scope.proposal.items.item.partType,
+            partMake: $scope.proposal.items.item.partMake,
+            process: $scope.proposal.items.item.process,
+            specifications: $scope.proposal.items.item.specifications,
+            description: $scope.proposal.items.item.description,
+            weight: $scope.proposal.items.item.weight,
+            length: $scope.proposal.items.item.length,
+            width: $scope.proposal.items.item.width,
+            quantity: $scope.proposal.items.item.quantity,
+            unitPrice: $scope.proposal.items.item.unitPrice,
+            note: $scope.proposal.items.item.note
+        });
+
+        $scope.modal.hide();
+    };
 })
 
 .controller('FilterCtrl', function($scope, $stateParams, Filters) {
