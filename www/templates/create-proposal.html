@@ -45,72 +45,75 @@
                     <p>Items: {{proposal.items.length}}</p>
                 </div>
                 <div class="col col-80">
-                    <h3>Items</h3>
-                    <p>Click or tap the button below to add items to your proposal.</p>
-                    <ion-item ng-repeat="item in proposal.items" class="card">
-                        <span ng-if="item.type == 'material'">
+                    <a class="button button-clear button-positive" ng-click="setState(1)">
+                        < Back to Step 1</a>
+                            <h3>Items</h3>
+                            <p>Click or tap the button below to add items to your proposal.</p>
+                            <ion-item ng-repeat="item in proposal.items" class="card">
+                                <span ng-if="item.type == 'material'">
                         <h4 class="card-title">{{item.materialType}}</h4>
                        <br />
                        <p><strong>Process:</strong> <span class="right">{{item.process}}</span></p>
-                        <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
-                        <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
-                        <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
-                        <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
-                        <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
-                        <hr />
-                        <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
+                                <p><strong>Specifications:</strong> <span class="right">{{item.specifications}}</span></p>
+                                <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
+                                <p><strong>Weight:</strong> <span class="right">{{item.weight | number}} lbs</span></p>
+                                <p><strong>Length:</strong> <span class="right">{{item.length | number}} ft</span></p>
+                                <p><strong>Width:</strong> <span class="right">{{item.width | number}} ft</span></p>
+                                <hr />
+                                <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
 
-                        <span ng-if="item.note.length > 0">
+                                <span ng-if="item.note.length > 0">
                             <br />
                             <hr>
                             <p><strong>Notes:</strong></p>
                             <p>{{item.note}} </p></span>
-                        </span>
+                                </span>
 
-                        <span ng-if="item.type == 'part'">
+                                <span ng-if="item.type == 'part'">
                         <h4 class="card-title">{{item.partType}}</h4>
                             <br />
                              <p><strong>Part Make:</strong> <span class="right">{{item.partMake}}</span></p>
-                        <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
+                                <p><strong>Description:</strong> <span class="right">{{item.description}}</span></p>
 
-                        <p><strong>Quantity:</strong> <span class="right">{{item.quantity| number}}</span></p>
-                        <hr />
-                        <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
+                                <p><strong>Quantity:</strong> <span class="right">{{item.quantity| number}}</span></p>
+                                <hr />
+                                <span class="right"><strong>Unit Price: </strong> <span class="right"  style="margin-left: 20px;">{{item.unitPrice | currency}}</span></span>
 
-                        <span ng-if="item.note.length > 0">
+                                <span ng-if="item.note.length > 0">
                                 <br />
                                 <hr>
                                 <p><strong>Notes:</strong></p>
                                 <p>{{item.note}} </p></span>
-                        </span>
-                    </ion-item>
+                                </span>
+                            </ion-item>
 
-                    <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
-                    <hr />
-                    <a class="button button-block button-positive" ng-click="setState(1)">Back to Step 1</a>
-                    <a class="button button-block button-positive" ng-click="setState(3)">Step 3: Add Vendors</a>
+                            <button class="button button-block button-stable" ng-click="addItem()">Add Item</button>
+                            <hr />
+
+                            <a class="button button-block button-positive" ng-click="setState(3)">Step 3: Add Vendors</a>
                 </div>
             </div>
             <!-- Step 3: add vendors -->
             <div class="row responsive-sm" ng-show="state.step === 3">
                 <div class="col col-20">
                     <h3>Step 3</h3>
-                    <p><strong>Vendors:</strong> {{(proposal.vendors).length | number}}</p>
                 </div>
                 <div class="col col-80">
-                    <span ng-if="(proposal.vendors).length > 0">
+                    <a class="button button-clear button-positive" ng-click="setState(2)">
+                        < Back to Step 2</a>
+                            <span ng-if="(proposal.vendors).length > 0">
                         <div class="row">
                             <div class="col">
                             <ion-item ng-repeat="vendor in proposal.vendors">
                                 <p>Supplier: <span class="right">{{vendor.company}}</span></p>
-                    <p>Contact Name: <span class="right">{{vendor.contact}}</span></p>
-                    <p>Materials Supplied: <span class="right">{{vendor.materialType}}</span>
-                        <form>
-                            <input type="checkbox" checked />
-                            <label>Include on proposal</label>
-                        </form>
-                    </p>
-                    </ion-item>
+                            <p>Contact Name: <span class="right">{{vendor.contact}}</span></p>
+                            <p>Materials Supplied: <span class="right">{{vendor.materialType}}</span>
+                                <form>
+                                    <input type="checkbox" checked />
+                                    <label>Include on proposal</label>
+                                </form>
+                            </p>
+                            </ion-item>
                 </div>
             </div>
             </span>

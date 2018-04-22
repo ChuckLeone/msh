@@ -237,6 +237,10 @@ td {
     border-bottom: 1px solid #e1e1e1;
 }
 
+.button {
+    max-width: 250px;
+}
+
 
 /* mods and break points */
 
