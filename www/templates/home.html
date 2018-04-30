@@ -1,6 +1,10 @@
 <ion-view>
     <ion-content overflow-scroll="false">
         <!-- logged out view -->
+        <div class="notification-bar" id="notification" ng-if="state.notification ===  1">
+            <span style="float: right;"><a ng-click="setNotification(0)">Close X</a></span>
+            <p>{{state.text}}</p>
+        </div>
         <div ng-show="state.loggedIn == !true">
             <div class="row responsive-sm">
                 <div class="col text-center bottom-pull">

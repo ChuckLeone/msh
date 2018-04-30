@@ -241,6 +241,28 @@ td {
     max-width: 250px;
 }
 
+.notification-bar {
+    height: 50px;
+    color: #fff;
+    background-color: #33cd5f;
+    margin: 10px;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.notification-bar p {
+    text-align: center;
+    font-size: 20px;
+    padding: 15px;
+}
+
+.notification-bar a {
+    color: #ffff;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 15px;
+}
+
 
 /* mods and break points */
 

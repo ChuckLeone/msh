@@ -12,9 +12,30 @@ angular.module('starter.controllers', [])
 
     $scope.state = {
         loggedIn: false,
-        userName: 'Please Lsogin',
-        admin: false
+        userName: 'Please Login',
+        admin: false,
+        notification: 0,
+        text: ''
     }
+
+    $scope.setNotification = function(state) {
+        switch (state) {
+            case 1:
+                $scope.state.notification = 1;
+                $scope.state.text = "Your proposal has ben submitted.";
+                break;
+
+            case 2:
+                $scope.state.notification = 1;
+                $scope.state.text = "Your proposal has ben cancelled.";
+                break;
+
+            default:
+                $scope.state.notification = 0;
+                break;
+        };
+    }
+
     $scope.userName = 'Please Login';
     $scope.$location;
 
@@ -226,6 +247,9 @@ angular.module('starter.controllers', [])
     }).then(function(modal) {
         $scope.modal = modal;
     });
+
+    $scope.state.notification(1);
+    console.log($scope.state.notification);
 })
 
 .controller('ProposalCtrl', function($scope, $state, Proposals) {
@@ -264,7 +288,6 @@ angular.module('starter.controllers', [])
 
     $location = "href=#/app/create-proposal";
 
-    // $scope.proposal = $scope.proposal;
     $scope.proposal = {
         id: setId(),
         title: '',
@@ -312,13 +335,13 @@ angular.module('starter.controllers', [])
 
 
     $scope.addItem = function() {
-        function setId() {
+        function setItemId() {
             var ids = Items.all();
             return id = ids.length + 1;
         }
         $scope.modal.show();
         $scope.proposal.items.item = {
-            id: setId(),
+            id: setItemId(),
         }
     };
 
@@ -328,108 +351,121 @@ angular.module('starter.controllers', [])
         var materialSelected = $scope.proposal.items.item.materialType
         switch (materialSelected) {
             case 'angle':
-                $scope.proposal.items.item.unitPrice = 200.70
+                $scope.proposal.items.item.unitPrice = 200.70;
                 break;
 
             case 'beam':
-                $scope.proposal.items.item.unitPrice = 122.50
+                $scope.proposal.items.item.unitPrice = 122.50;
                 break;
 
             case 'channel':
-                $scope.proposal.items.item.unitPrice = 45.50
+                $scope.proposal.items.item.unitPrice = 45.50;
                 break;
 
             case 'flatbar':
-                $scope.proposal.items.item.unitPrice = 44.50
+                $scope.proposal.items.item.unitPrice = 44.50;
                 break;
 
             case 'grating':
-                $scope.proposal.items.item.unitPrice = 23.50
+                $scope.proposal.items.item.unitPrice = 23.50;
                 break;
 
             case 'pipe':
-                $scope.proposal.items.item.unitPrice = 55.50
+                $scope.proposal.items.item.unitPrice = 55.50;
                 break;
 
             case 'plate':
-                $scope.proposal.items.item.unitPrice = 82.50
+                $scope.proposal.items.item.unitPrice = 82.50;
                 break;
 
             case 'roundbar':
-                $scope.proposal.items.item.unitPrice = 100.50
+                $scope.proposal.items.item.unitPrice = 100.50;
                 break;
 
             case 'tee':
-                $scope.proposal.items.item.unitPrice = 34.50
+                $scope.proposal.items.item.unitPrice = 34.50;
                 break;
 
             case 'tube-rectanglge':
-                $scope.proposal.items.item.unitPrice = 162.50
+                $scope.proposal.items.item.unitPrice = 162.50;
                 break;
 
             case 'tube-square':
-                $scope.proposal.items.item.unitPrice = 22.50
+                $scope.proposal.items.item.unitPrice = 22.50;
                 break;
 
             case 'other':
-                $scope.proposal.items.item.unitPrice = 122.50
+                $scope.proposal.items.item.unitPrice = 122.50;
                 break;
 
             default:
-                $scope.proposal.items.item.unitPrice = 0.00
+                $scope.proposal.items.item.unitPrice = 0.00;
                 break;
         };
         switch (partTypeSelected) {
             case 'bushing':
-                $scope.proposal.items.item.additionalInfo = '316SS'
+                $scope.proposal.items.item.additionalInfo = '316SS';
+                $scope.proposal.items.item.unitPrice = 12.70;
                 break;
 
             case 'clamps':
-                $scope.proposal.items.item.additionalInfo = '304SS - JENSEN JC13HD OR EQUAL'
+                $scope.proposal.items.item.additionalInfo = '304SS - JENSEN JC13HD OR EQUAL';
+                $scope.proposal.items.item.unitPrice = 200.00;
                 break;
 
             case 'concentric-reducers':
-                $scope.proposal.items.item.additionalInfo = '316SS'
+                $scope.proposal.items.item.additionalInfo = '316SS';
+                $scope.proposal.items.item.unitPrice = 12.30;
                 break;
 
             case 'couplings':
-                $scope.proposal.items.item.additionalInfo = 'SFT5405'
+                $scope.proposal.items.item.additionalInfo = 'SFT5405';
+                $scope.proposal.items.item.unitPrice = 20.10;
                 break;
 
             case 'elbows':
-                $scope.proposal.items.item.additionalInfo = '316SS'
+                $scope.proposal.items.item.additionalInfo = '316SS';
+                $scope.proposal.items.item.unitPrice = 323.11;
                 break;
 
             case 'fasteners':
-                $scope.proposal.items.item.additionalInfo = 'ASTM A194 Grade 8A (304 Stainless Steel)'
+                $scope.proposal.items.item.additionalInfo = 'ASTM A194 Grade 8A (304 Stainless Steel)';
+                $scope.proposal.items.item.unitPrice = 33.99;
                 break;
 
             case 'flange':
-                $scope.proposal.items.item.additionalInfo = 'ANSI B16.5, ASTM B247 Grade 6061-T6 Aluminum'
+                $scope.proposal.items.item.additionalInfo = 'ANSI B16.5, ASTM B247 Grade 6061-T6 Aluminum';
+                $scope.proposal.items.item.unitPrice = 3.23;
                 break;
 
             case 'reducer':
-                $scope.proposal.items.item.additionalInfo = 'CONCAVE - BW - SMLS'
+                $scope.proposal.items.item.additionalInfo = 'CONCAVE - BW - SMLS';
+                $scope.proposal.items.item.unitPrice = 7.23;
                 break;
 
             case 'sockolet':
-                $scope.proposal.items.item.additionalInfo = 'ANSI B16.9, ASME SB-247 - 6061-T6 ALUMINUM'
+                $scope.proposal.items.item.additionalInfo = 'ANSI B16.9, ASME SB-247 - 6061-T6 ALUMINUM';
+                $scope.proposal.items.item.unitPrice = 52.23;
                 break;
 
             case 'stub-end':
-                $scope.proposal.items.item.additionalInfo = 'ASME B16.9, ASTM B 361 - WP6061-T6 ALUMINUM'
+                $scope.proposal.items.item.additionalInfo = 'ASME B16.9, ASTM B 361 - WP6061-T6 ALUMINUM';
+                $scope.proposal.items.item.unitPrice = 41.20;
                 break;
 
             case 'tees':
-                $scope.proposal.items.item.additionalInfo = '316SS - JENSEN J7WR OR EQUAL'
+                $scope.proposal.items.item.additionalInfo = '316SS - JENSEN J7WR OR EQUAL';
+                $scope.proposal.items.item.unitPrice = 32.11;
                 break;
 
             case 'threadolet':
-                $scope.proposal.items.item.additionalInfo = 'A105'
+                $scope.proposal.items.item.additionalInfo = 'A105';
+                $scope.proposal.items.item.unitPrice = 45.89;
                 break;
 
             default:
                 $scope.proposal.items.item.additionalInfo = 'please select a part'
+                $scope.proposal.items.item.unitPrice = 0.00;
                 break;
         }
     };
@@ -459,7 +495,7 @@ angular.module('starter.controllers', [])
         Proposals.add($scope.proposal);
         Proposals.post();
         $localStorage = Proposals.all(proposal);
-        //$state.transitionTo("app.create-proposal");
+        $scope.setNotification(1);
     };
 
     $scope.saveItem = function(proposal) {
@@ -483,23 +519,23 @@ angular.module('starter.controllers', [])
         $scope.modal.hide();
     };
 
-    $scope.createProposal = function() {
-        $scope.proposal = {
-            id: $scope.proposal.id,
-            title: $scope.proposal.title,
-            description: $scope.proposal.description,
-            dueDate: $scope.proposal.dueDate,
-            poNumber: $scope.proposal.poNumber,
-            contact: 'Harrison',
-            face: 'img/harrison.jpg',
-            items: $scope.proposal.items,
-            vendors: $scope.proposal.vendors,
-            status: 'pending'
-        };
-        $scope.proposal = this.proposal;
-        $scope.saveProposal();
-        return this.proposal;
-    };
+    // $scope.createProposal = function() {
+    //     $scope.proposal = {
+    //         id: $scope.proposal.id,
+    //         title: $scope.proposal.title,
+    //         description: $scope.proposal.description,
+    //         dueDate: $scope.proposal.dueDate,
+    //         poNumber: $scope.proposal.poNumber,
+    //         contact: 'Harrison',
+    //         face: 'img/harrison.jpg',
+    //         items: $scope.proposal.items,
+    //         vendors: $scope.proposal.vendors,
+    //         status: 'pending'
+    //     };
+    //     $scope.proposal = this.proposal;
+    //     $scope.saveProposal();
+    //     return this.proposal;
+    // };
 
     $scope.vendors = Vendors.all();
     $scope.vendors.checked = [];
@@ -624,6 +660,7 @@ angular.module('starter.controllers', [])
     $scope.remove = function(proposal) {
         Proposals.remove(proposal);
         $state.transitionTo('app.home');
+        $scope.setNotification(2);
     }
 
     $ionicModal.fromTemplateUrl('templates/proposal-add-new-vendor.html', {
